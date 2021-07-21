@@ -26,6 +26,15 @@ By the end of this course, I will be able to be a specialist in using Structured
 
 7.	Retrieving records and compute calculations that are dependent on dynamic data features, and translating data analysis questions into SQL queries. 
 
+# Syllabus
+
+### - Week 1 - ER Diagrams, RS, database concepts
+### - Week 2 - Select, where, from, order by, limit, operations
+### - Week 3 - Group by, having, distinct, operators
+### - Week 3 - Inner Joins, Outer Joins + examples
+### - Week 4 - Subqueries & more Operators + examples
+
+
 # 3.  The data
 Throughout the course, I worked with two datasets:
 ## 3.1. Dognition
@@ -47,11 +56,13 @@ Throughout the course, I worked with two datasets:
   <summary>Dillards information</summary>
   
   <img src="https://i.imgur.com/paCQCka.jpg" width="300">
+
+  ### Motivation
   
   [dataset info](https://d3c33hcgiwev3.cloudfront.net/_8ab42fa0c1e02dd9e637c84dcd8c6741_Dillards_database_information.pdf?Expires=1626998400&Signature=AqRDh7CoICNwmW3gzVx2sGcK5Dv3~q6GGQBasZ5QZuI3siYZxnfTGMpB4TiXRQDC1dwrtJTGfInZ6Q1YlINuhojSg9~XI7LdD4AbDYbiJK8LKVDpsuWekwWrwdxnPc19CeeZzH2i4svRoI-Y~SZ7MAKDh0o91JlVyDtBDjdvwL8_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
   
-  ## ERD
+  ### ERD
   
-  <img src="https://i.imgur.com/kZ4wpz5.png" width="300">
+  <img src="https://i.imgur.com/kZ4wpz5.png" width="500">
 
 </details>
