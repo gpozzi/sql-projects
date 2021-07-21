@@ -28,12 +28,10 @@ By the end of this course, I will be able to be a specialist in using Structured
 
 # Syllabus
 
-### - Week 1 - ER Diagrams, RS, database concepts
-### - Week 2 - Select, where, from, order by, limit, operations
-### - Week 3 - Group by, having, distinct, operators
-### - Week 3 - Inner Joins, Outer Joins + examples
-### - Week 4 - Subqueries & more Operators + examples
-
+- Week 1 - ER Diagrams, RS, database concepts
+- Week 2 - Select, where, from, order by, limit, operations
+- Week 3 - Group by, having, distinct, operators, Inner Joins, Outer Joins
+- Week 4 - Subqueries & more Operators + examples
 
 # 3.  The data
 Throughout the course, I worked with two datasets:
