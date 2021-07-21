@@ -8,23 +8,9 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 # 2. Course Overview
 
-The Coursera Specialization: Excel to MySQL: Analytic Techniques for Business is about how “Big Data” interacts with business, and how to use data analytics to create value for businesses. The specialization consists of four courses and a capstone project. In this folder, I'll be posting projects from course 4: Managing Big Data With MySQL.
+> This course is an introduction to how to use relational databases in business analysis.  You will learn how relational databases work, and how to use entity-relationship diagrams to display the structure of the data held within them.  This knowledge will help you understand how data needs to be collected in business contexts, and help you identify features you want to consider if you are involved in implementing new data collection efforts.  You will also learn how to execute the most useful query and table aggregation statements for business analysts, and practice using them with real databases. No more waiting 48 hours for someone else in the company to provide data to you – you will be able to get the data by yourself!
 
-By the end of this course, I will be able to be a specialist in using Structured Query Language, or SQL, to retrieve and analyze big data from industrial-sized relational databases, by:
-
-1.	Describing the structure of relational databases; 
-
-2.	Interpreting and creating entity-relationship diagrams and relational schemas that describe the contents of specific databases; 
-
-3.	Writing queries that retrieve and sort data that meet specific criteria, and retrieve such data from MySQL and Teradata databases that contain over 1 million rows of data; 
-
-4.	Executing practices that limit the impact of your queries on other coworkers; 
-
-5.	Summarizing rows of data using aggregate functions, and segmenting aggregations according to specified variables; 
-
-6.	Combining and manipulating data from multiple tables across a database; 
-
-7.	Retrieving records and compute calculations that are dependent on dynamic data features, and translating data analysis questions into SQL queries. 
+>By the end of this course, you will have a clear understanding of how relational databases work, and have a portfolio of queries you can show potential employers. Businesses are collecting increasing amounts of information with the hope that data will yield novel insights into how to improve businesses. Analysts that understand how to access this data – this means you! – will have a strong competitive advantage in this data-smitten business world.
 
 # Syllabus
 
