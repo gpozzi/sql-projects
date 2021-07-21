@@ -1,4 +1,4 @@
-# ENG <img src="https://www.buyflags.eu/sites/default/files/products-images/state-flags/velkabritaniamotovlajkaneobsita.png" width="40">
+# Course overview: Managing Big Data with SQL
 
 <img src="https://i.imgur.com/nI7HkQC.jpg" width="300">
 
@@ -8,10 +8,46 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 # 2. Course Overview
 
-The Coursera Specialization: Excel to MySQL: Analytic Techniques for Business is about how “Big Data” interacts with business, and how to use data analytics to create value for businesses. The specialization consists of four courses and a capstone project. The course .
+The Coursera Specialization: Excel to MySQL: Analytic Techniques for Business is about how “Big Data” interacts with business, and how to use data analytics to create value for businesses. The specialization consists of four courses and a capstone project. In this folder, I'll be posting projects from course 4: Managing Big Data With MySQL.
 
-Great business analysts have been called the “unicorns” of the business world. They are supposed to deeply understand business concepts, wield powerful quantitative skills, execute exceptional critical and structured thinking, and persuasively communicate complicated concepts using exciting visualizations and non-technical knowledge. How is it possible for one person to even know what all these things mean, let alone master them?
+By the end of this course, I will be able to be a specialist in using Structured Query Language, or SQL, to retrieve and analyze big data from industrial-sized relational databases, by:
 
-We’re here to tell you it is possible. By the end of this specialization, you will be able to:
+1.	Describing the structure of relational databases; 
 
-Be a specialist in using Structured Query Language, or SQL, to retrieve and analyze big data from industrial-sized relational databases
+2.	Interpreting and creating entity-relationship diagrams and relational schemas that describe the contents of specific databases; 
+
+3.	Writing queries that retrieve and sort data that meet specific criteria, and retrieve such data from MySQL and Teradata databases that contain over 1 million rows of data; 
+
+4.	Executing practices that limit the impact of your queries on other coworkers; 
+
+5.	Summarizing rows of data using aggregate functions, and segmenting aggregations according to specified variables; 
+
+6.	Combining and manipulating data from multiple tables across a database; 
+
+7.	Retrieving records and compute calculations that are dependent on dynamic data features, and translating data analysis questions into SQL queries. 
+
+# 3.  The data
+Throughout the course, I worked with two datasets:
+## 3.1. Dognition
+
+<details>
+  <summary>Dognition information</summary>
+  
+  ## Heading
+  1. A numbered
+  2. list
+     * With some
+     * Sub bullets
+
+</details>
+
+## 3.2. Dillards
+
+<details>
+  <summary>Dillards information</summary>
+  <img src="https://i.imgur.com/paCQCka.jpg" width="300">
+  ## ERD
+  
+  <img src="https://i.imgur.com/kZ4wpz5.png" width="300">
+
+</details>
