@@ -28,7 +28,7 @@ month.
 
 ### Platform
 
-All queries were executed in **jupyter notebook** platform, hence the *%%sql* statement before all queries in sql files into this notebook
+All queries were executed in **jupyter notebook** platform, hence the *%%sql* statement before all queries in sql files into this folder.
 
 ### Data description
 
