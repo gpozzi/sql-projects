@@ -1,4 +1,4 @@
-# Dognition Dataset
+# Project at a glance: Dognition
 
 <img src="https://i.imgur.com/wqfrRRS.jpg" width="300">
 
