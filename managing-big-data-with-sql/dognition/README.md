@@ -26,6 +26,10 @@ month.
 - All information that could be used to identify specific users has been removed.
 - More details about the Dognition data collection method can be found at: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135176 (Stewart, Laughlin, et al. “Citizen science as a new tool in dog cognition research.” PloS One 10.9 (2015): e0135176.)
 
+### Platform
+
+All queries were executed in **jupyter notebook** platform, hence the *%%sql* statement before all queries in sql files into this notebook
+
 ### Data description
 
 Dataset has been provided by [Dognition](https://www.dognition.com/), it contains **46 attributes**, which are:
