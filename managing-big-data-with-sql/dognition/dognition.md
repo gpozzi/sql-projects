@@ -242,3 +242,154 @@ SELECT AVG(TIMESTAMPDIFF(minute,start_time,end_time)) AS AvgDuration
 FROM exam_answers
 WHERE TIMESTAMPDIFF(minute,start_time,end_time)>0
 ```
+
+# GROUP BY and HAVING
+
+#### Output a table that calculates the number of distinct female and male dogs in each breed group of the Dogs table, sorted by the total number of dogs in descending order (the sex/breed_group pair with the greatest number of dogs should have 8466 unique Dog_Guids):
+
+```sql
+SELECT gender, breed_group, COUNT(DISTINCT dog_guid) AS Num_Dogs
+FROM dogs
+GROUP BY gender, breed_group
+ORDER BY Num_Dogs DESC;
+```
+
+#### Revise the query your wrote in Question 1 so that it uses only numbers in the GROUP BY and ORDER BY fields.
+
+```sql
+SELECT gender, breed_group, COUNT(DISTINCT dog_guid) AS Num_Dogs
+FROM dogs
+GROUP BY 1, 2
+ORDER BY 3 DESC;
+```
+
+#### Revise the query your wrote in Question 2 so that it (1) excludes the NULL and empty string entries in the breed_group field, and (2) excludes any groups that don't have at least 1,000 distinct Dog_Guids in them. Your result should contain 8 rows. (HINT: sometimes empty strings are registered as non-NULL values. You might want to include the following line somewhere in your query to exclude these values as well): breed_group!=""
+
+```sql
+SELECT gender, breed_group, COUNT(DISTINCT dog_guid) AS Num_Dogs
+FROM dogs
+WHERE breed_group IS NOT NULL AND breed_group!="None" AND breed_group!=""
+GROUP BY 1, 2
+HAVING Num_Dogs >= 1000
+ORDER BY 3 DESC;
+```
+
+#### Write a query that outputs the average number of tests completed and average mean inter-test-interval for every breed type, sorted by the average number of completed tests in descending order (popular hybrid should be the first row in your output).
+
+```sql
+SELECT breed_type, AVG(total_tests_completed) AS TotTests, AVG(mean_iti_minutes)
+AS AvgMeanITI
+FROM dogs
+GROUP BY breed_type
+ORDER BY AVG(total_tests_completed) DESC;
+```
+
+#### Write a query that outputs the average amount of time it took customers to complete each type of test where any individual reaction times over 6000 hours are excluded and only average reaction times that are greater than 0 seconds are included (your output should end up with 67 rows).
+
+```sql
+SELECT test_name,
+AVG(TIMESTAMPDIFF(HOUR,start_time,end_time)) AS Duration
+FROM exam_answers
+WHERE timestampdiff(MINUTE,start_time,end_time) < 6000
+GROUP BY test_name
+HAVING AVG (timestampdiff(MINUTE,start_time,end_time)) > 0 ORDER BY Duration
+desc;
+```
+
+#### Write a query that outputs the total number of unique User_Guids in each combination of State and ZIP code (postal code) in the United States, sorted first by state name in ascending alphabetical order, and second by total number of unique User_Guids in descending order (your first state should be AE and there should be 5043 rows in total in your output).
+
+```sql
+SELECT state, zip, COUNT(DISTINCT user_guid) AS NUM_Users
+FROM users
+WHERE Country="US"
+GROUP BY State, zip
+ORDER BY State ASC, NUM_Users DESC;
+```
+
+#### Write a query that outputs the total number of unique User_Guids in each combination of State and ZIP code in the United States that have at least 5 users, sorted first by state name in ascending alphabetical order, and second by total number of unique User_Guids in descending order (your first state/ZIP code combination should be AZ/86303).
+
+```sql
+SELECT state, zip, COUNT(DISTINCT user_guid) AS NUM_Users
+FROM users
+WHERE Country="US"
+GROUP BY State, zip
+HAVING NUM_Users>=5
+ORDER BY State ASC, NUM_Users DESC;
+```
+
+# INNER JOIN
+
+#### How many unique dog_guids and user_guids are there in the reviews and dogs table independently?
+
+`Q1`
+
+```sql
+SELECT COUNT(DISTINCT dog_guid) 
+FROM reviews;
+```
+
+`Q2`
+```sql
+SELECT COUNT(DISTINCT user_guid) 
+FROM reviews; 
+```
+
+`Q3`
+
+```sql
+SELECT COUNT(DISTINCT dog_guid) 
+FROM dogs; 
+```
+
+`Q4`
+
+```sql
+SELECT COUNT(DISTINCT user_guid) 
+FROM dogs; 
+```
+
+#### How would you extract the user_guid, dog_guid, breed, breed_type, and breed_group for all animals who completed the "Yawn Warm-up" game (you should get 20,845 rows if you join on dog_guid only)?
+
+```sql
+SELECT d.user_guid AS UserID, d.dog_guid AS DogID, d.breed, d.breed_type, d.breed_group 
+FROM dogs d, complete_tests c 
+WHERE d.dog_guid=c.dog_guid AND test_name='Yawn Warm-up';
+```
+
+#### How would you extract the user_guid, membership_type, and dog_guid of all the golden retrievers who completed at least 1 Dognition test (you should get 711 rows)?
+
+```sql
+SELECT DISTINCT d.user_guid AS UserID, u.membership_type, d.dog_guid AS DogID, d.breed 
+FROM dogs d, complete_tests c, users u 
+WHERE d.dog_guid=c.dog_guid 
+AND d.user_guid=u.user_guid   
+AND d.breed="golden retriever";
+```
+
+#### How many unique Golden Retrievers who live in North Carolina are there in the Dognition database (you should get 30)?
+
+```sql
+SELECT u.state AS state, d.breed AS breed, COUNT(DISTINCT d.dog_guid)
+FROM users u, dogs d 
+WHERE d.user_guid=u.user_guid AND breed="Golden Retriever"
+GROUP BY state 
+HAVING state="NC";
+```
+
+#### How many unique customers within each membership type provided reviews (there should be 2900 in the membership type with the greatest number of customers, and 15 in the membership type with the fewest number of customers if you do NOT include entries with NULL values in their ratings field)?
+
+```sql
+SELECT u.membership_type AS Membership, COUNT(DISTINCT r.user_guid) 
+FROM users u, reviews r 
+WHERE u.user_guid=r.user_guid AND r.rating IS NOT NULL
+GROUP BY membership_type;
+```
+
+#### For which 3 dog breeds do we have the greatest amount of site_activity data, (as defined by non-NULL values in script_detail_id)(your answers should be "Mixed", "Labrador Retriever", and "Labrador Retriever-Golden Retriever Mix"?
+
+```sql
+SELECT d.breed, COUNT(s.script_detail_id) AS activity 
+FROM dogs d, site_activities s 
+WHERE d.dog_guid=s.dog_guid AND s.script_detail_id IS NOT NULL 
+GROUP BY breed ORDER BY activity DESC
+```
