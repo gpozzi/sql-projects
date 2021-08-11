@@ -21,18 +21,8 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 # 3.  The data
 Throughout the course, I worked with two datasets:
-## 3.1. Dognition
+## 3.1. [Dognition](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition)
 
-<details>
-  <summary>Dognition information</summary>
-  
-  ## Heading
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
-
-</details>
 
 ## 3.2. Dillards
 
