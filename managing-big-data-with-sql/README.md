@@ -21,17 +21,10 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 # 3.  The data
 Throughout the course, I worked with two datasets:
-## 3.1. [Dognition](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition)
+[Dognition](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition)
+[Dillards](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dillards)
 
-
-## 3.2. Dillards
-
-<details>
-  <summary>Dillards information</summary>
-  
-  <img src="https://i.imgur.com/paCQCka.jpg" width="300">
-
-  ### Motivation
+### Motivation
   
   [dataset info](https://d3c33hcgiwev3.cloudfront.net/_8ab42fa0c1e02dd9e637c84dcd8c6741_Dillards_database_information.pdf?Expires=1626998400&Signature=AqRDh7CoICNwmW3gzVx2sGcK5Dv3~q6GGQBasZ5QZuI3siYZxnfTGMpB4TiXRQDC1dwrtJTGfInZ6Q1YlINuhojSg9~XI7LdD4AbDYbiJK8LKVDpsuWekwWrwdxnPc19CeeZzH2i4svRoI-Y~SZ7MAKDh0o91JlVyDtBDjdvwL8_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
   
