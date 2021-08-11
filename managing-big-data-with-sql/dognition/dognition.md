@@ -393,3 +393,19 @@ FROM dogs d, site_activities s
 WHERE d.dog_guid=s.dog_guid AND s.script_detail_id IS NOT NULL 
 GROUP BY breed ORDER BY activity DESC
 ```
+# OUTER JOINS
+How would you re-write this query using the traditional join syntax? 
+```mySQL
+SELECT d.user_guid AS UserID, d.dog_guid AS DogID, 
+       d.breed, d.breed_type, d.breed_group
+FROM dogs d, complete_tests c
+WHERE d.dog_guid=c.dog_guid AND test_name='Yawn Warm-up';
+```
+
+```mySQL
+SELECT d.user_guid AS UserID, d.dog_guid AS DogID, d.breed, d.breed_type,
+d.breed_group
+FROM dogs d JOIN complete_tests c
+ON d.dog_guid=c.dog_guid
+WHERE test_name='Yawn Warm-up';
+```
