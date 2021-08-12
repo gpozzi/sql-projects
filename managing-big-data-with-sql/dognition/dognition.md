@@ -394,14 +394,14 @@ WHERE d.dog_guid=s.dog_guid AND s.script_detail_id IS NOT NULL
 GROUP BY breed ORDER BY activity DESC
 ```
 # OUTER JOINS
-How would you re-write this query using the traditional join syntax? 
+#### How would you re-write this query using the traditional join syntax? 
 ```mySQL
 SELECT d.user_guid AS UserID, d.dog_guid AS DogID, 
        d.breed, d.breed_type, d.breed_group
 FROM dogs d, complete_tests c
 WHERE d.dog_guid=c.dog_guid AND test_name='Yawn Warm-up';
 ```
-
+#### Solution
 ```mySQL
 SELECT d.user_guid AS UserID, d.dog_guid AS DogID, d.breed, d.breed_type,
 d.breed_group
@@ -409,3 +409,573 @@ FROM dogs d JOIN complete_tests c
 ON d.dog_guid=c.dog_guid
 WHERE test_name='Yawn Warm-up';
 ```
+#### How could you retrieve this same information using a RIGHT JOIN?
+
+```mysql
+SELECT r.dog_guid AS rDogID, d.dog_guid AS dDogID, r.user_guid AS rUserID, d.user_guid AS dUserID, AVG(r.rating) AS AvgRating, COUNT(r.rating) AS NumRatings, d.breed, d.breed_group, d.breed_type
+FROM reviews r LEFT JOIN dogs d
+  ON r.dog_guid=d.dog_guid AND r.user_guid=d.user_guid
+WHERE r.dog_guid IS NOT NULL
+GROUP BY r.dog_guid
+HAVING NumRatings >= 10
+ORDER BY AvgRating DESC;
+```
+
+#### How would you use a left join to retrieve a list of all the unique dogs in the dogs table, and retrieve a count of how many tests each one completed? Include the dog_guids and user_guids from the dogs and complete_tests tables in your output. (If you do not limit your query, your output should contain 35050 rows. HINT: use the dog_guid from the dogs table to group your results.)
+
+```mysql
+SELECT d.user_guid AS dUserID, c.user_guid AS cUserID, d.dog_guid AS dDogID,
+c.dog_guid AS dDogID, count(test_name)
+FROM dogs d LEFT JOIN complete_tests c
+ON d.dog_guid=c.dog_guid
+GROUP BY d.dog_guid;
+```
+
+#### Repeat the query you ran in Question 3, but intentionally use the dog_guids from the completed_tests table to group your results instead of the dog_guids from the dogs table. (Your output should contain 17987 rows)
+
+```mysql
+SELECT d.user_guid AS dUserID, c.user_guid AS cUserID, d.dog_guid AS dDogID,
+c.dog_guid AS dDogID, count(test_name)
+FROM dogs d LEFT JOIN complete_tests c
+ON d.dog_guid=c.dog_guid
+GROUP BY c.dog_guid;
+```
+
+#### Write a query using COUNT DISTINCT to determine how many distinct dog_guids there are in the completed_tests table.
+
+```mysql
+SELECT COUNT(DISTINCT dog_guid)
+FROM complete_tests;
+```
+
+#### We want to extract all of the breed information of every dog a user_guid in the users table owns. If a user_guid in the users table does not own a dog, we want that information as well. Write a query that would return this information. Include the dog_guid from the dogs table, and user_guid from both the users and dogs tables in your output. (HINT: you should get 952557 rows in your output!)
+
+```mysql
+SELECT u.user_guid AS uUserID, d.user_guid AS dUserID, d.dog_guid AS dDogID,
+d.breed
+FROM users u LEFT JOIN dogs d
+ON u.user_guid=d.user_guid;
+```
+
+#### Adapt the query you wrote above so that it counts the number of rows the join will output per user_id. Sort the results by this count in descending order. Remember that if you include dog_guid or breed fields in this query, they will be randomly populated by only one of the values associated with a user_guid (see MySQL Exercise 6; there should be 33,193 rows in your output).
+
+```mysql
+SELECT u.user_guid AS uUserID, d.user_guid AS dUserID, d.dog_guid AS dDogID,
+d.breed, count(*) AS numrows
+FROM users u LEFT JOIN dogs d
+ON u.user_guid=d.user_guid
+GROUP BY u.user_guid
+ORDER BY numrows DESC;
+```
+
+#### How many rows in the users table are associated with user_guid 'ce225842-7144-11e5-ba71-058fbc01cf0b'?
+
+```mysql
+SELECT COUNT(user_guid)
+FROM users
+WHERE user_guid='ce225842-7144-11e5-ba71-058fbc01cf0b';
+```
+
+#### Examine all the rows in the dogs table that are associated with user_guid 'ce225842-7144-11e5-ba71-058fbc01cf0b'?
+
+```mysql
+SELECT *
+FROM dogs
+WHERE user_guid='ce225842-7144-11e5-ba71-058fbc01cf0b';
+```
+
+#### How would you write a query that used a left join to return the number of distinct user_guids that were in the users table, but not the dogs table (your query should return a value of 2226)?
+
+```mysql
+SELECT COUNT(user_guid)
+FROM users
+WHERE user_guid='ce225842-7144-11e5-ba71-058fbc01cf0b';
+```
+
+#### How would you write a query that used a right join to return the number of distinct user_guids that were in the users table, but not the dogs table (your query should return a value of 2226)?
+
+```mysql
+SELECT COUNT(DISTINCT u.user_guid)
+FROM users u LEFT JOIN dogs d
+ON u.user_guid=d.user_guid
+WHERE d.user_guid IS NULL;
+```
+
+#### Use a left join to create a list of all the unique dog_guids that are contained in the site_activities table, but not the dogs table, and how many times each one is entered.  Note that there are a lot of NULL values in the dog_guid of the site_activities table, so you will want to exclude them from your list.  (Hint: if you exclude null values, the results you get will have two rows with words in their site_activities dog_guid fields instead of real guids, due to mistaken entries)
+
+```mysql
+SELECT s.dog_guid AS SA_dogs_not_present_in_dogs_table, COUNT(*) AS
+NumEntries
+FROM site_activities s LEFT JOIN dogs d
+ON s.dog_guid=d.dog_guid
+WHERE d.dog_guid IS NULL AND s.dog_guid IS NOT NULL
+GROUP BY SA_dogs_not_present_in_dogs_table;
+```
+
+# Subqueries and derived tables
+
+#### How could you use a subquery to extract all the data from exam_answers that had test durations that were greater than the average duration for the "Yawn Warm-Up" game? Start by writing the query that gives you the average duration for the "Yawn Warm-Up" game by itself (and don't forget to exclude negative values; your average duration should be about 9934)
+
+```mysql
+SELECT AVG(TIMESTAMPDIFF(minute,start_time,end_time)) AS AvgDuration
+FROM exam_answers
+WHERE TIMESTAMPDIFF(minute,start_time,end_time)>0 AND test_name="Yawn
+Warm-Up";
+```
+
+#### Once you've verified that your subquery is written correctly on its own, incorporate it into a main query to extract all the data from exam_answers that had test durations that were greater than the average duration for the "Yawn Warm-Up" game (you will get 11059 rows)
+
+```mysql
+SELECT *
+FROM exam_answers
+WHERE TIMESTAMPDIFF(minute,start_time,end_time) >
+(SELECT AVG(TIMESTAMPDIFF(minute,start_time,end_time)) AS AvgDuration
+FROM exam_answers
+WHERE TIMESTAMPDIFF(minute,start_time,end_time)>0 AND
+test_name="Yawn Warm-Up");
+```
+
+#### Use an IN operator to determine how many entries in the exam_answers tables are from the "Puzzles", "Numerosity", or "Bark Game" tests. You should get a count of 163022.
+
+```mysql
+SELECT COUNT(*)
+FROM exam_answers
+WHERE subcategory_name IN ('Puzzles','Numerosity','Bark Game');
+```
+
+#### Use a NOT IN operator to determine how many unique dogs in the dog table are NOT in the "Working", "Sporting", or "Herding" breeding groups. You should get an answer of 7961.
+
+```mysql
+SELECT COUNT(DISTINCT dog_guid)
+FROM dogs
+WHERE breed_group NOT IN ('Working','Sporting','Herding');
+```
+
+#### How could you determine the number of unique users in the users table who were NOT in the dogs table using a NOT EXISTS clause? You should get the 2226, the same result as you got in Question 10 of MySQL Exercise 8: Joining Tables with Outer Joins.
+
+```mysql
+SELECT DISTINCT u.user_guid AS uUserID
+FROM users u
+WHERE NOT EXISTS (SELECT d.user_guid
+FROM dogs d
+WHERE u.user_guid =d.user_guid);
+```
+
+#### Write a query using an IN clause and equijoin syntax that outputs the dog_guid, breed group, state of the owner, and zip of the owner for each distinct dog in the Working, Sporting, and Herding breed groups. (You should get 10,254 rows; the query will be a little slower than some of the others we have practiced)
+
+```mysql
+SELECT DISTINCT d.dog_guid, d.breed_group, u.state, u.zip
+FROM dogs d, users u
+WHERE breed_group IN ('Working','Sporting','Herding') AND d.user_guid=u.user_guid;
+```
+
+#### Write the same query as in Question 6 using traditional join syntax.
+
+```mysql
+SELECT DISTINCT d.dog_guid, d.breed_group, u.state, u.zip
+FROM dogs d JOIN users u
+ON d.user_guid=u.user_guid
+WHERE breed_group IN ('Working','Sporting','Herding');
+```
+
+#### Earlier we examined unique users in the users table who were NOT in the dogs table. Use a NOT EXISTS clause to examine all the users in the dogs table that are not in the users table (you should get 2 rows in your output).
+
+```mysql
+SELECT d.user_guid AS dUserID, d.dog_guid AS dDogID
+FROM dogs d
+WHERE NOT EXISTS (SELECT DISTINCT u.user_guid
+FROM users u
+WHERE d.user_guid =u.user_guid);
+```
+
+#### We saw earlier that user_guid 'ce7b75bc-7144-11e5-ba71-058fbc01cf0b' still ends up with 1819 rows of output after a left outer join with the dogs table. If you investigate why, you'll find out that's because there are duplicate user_guids in the dogs table as well. How would you adapt the query we wrote earlier (copied below) to only join unique UserIDs from the users table with unique UserIDs from the dog table?
+
+```mysql
+SELECT DistinctUUsersID.user_guid AS uUserID, d.user_guid AS dUserID, count(*) AS
+numrows
+FROM (SELECT DISTINCT u.user_guid
+FROM users u
+WHERE u.user_guid='ce7b75bc-7144-11e5-ba71-058fbc01cf0b') AS
+DistinctUUsersID
+LEFT JOIN dogs d
+ON DistinctUUsersID.user_guid=d.user_guid
+GROUP BY DistinctUUsersID.user_guid
+ORDER BY numrows DESC;
+```
+
+#### Now let's prepare and test the inner query for the right half of the join. Give the dogs table an alias, and write a query that would select the distinct user_guids from the dogs table (we will use this query as a inner subquery in subsequent questions, so you will need an alias to differentiate the user_guid column of the dogs table from the user_guid column of the users table).
+
+```mysql
+SELECT DISTINCT d.user_guid
+FROM dogs d
+```
+
+#### Now insert the query you wrote in Question 10 as a subquery on the right part of the join you wrote in question 9. The output should return columns that should have matching user_guids, and 1 row in the numrows column with a value of 1. If you are getting errors, make sure you have given an alias to the derived table you made to extract the distinct user_guids from the dogs table, and double-check that your aliases are referenced correctly in the SELECT and ON statements.
+
+```mysql
+SELECT DistinctUUsersID.user_guid AS uUserID, DistictDUsersID.user_guid AS
+dUserID, count(*) AS numrows
+FROM (SELECT DISTINCT u.user_guid
+FROM users u
+WHERE u.user_guid='ce7b75bc-7144-11e5-ba71-058fbc01cf0b') AS
+DistinctUUsersID
+LEFT JOIN (SELECT DISTINCT d.user_guid
+FROM dogs d) AS DistictDUsersID
+ON DistinctUUsersID.user_guid=DistictDUsersID.user_guid
+GROUP BY DistinctUUsersID.user_guid
+ORDER BY numrows DESC;
+```
+
+#### Adapt the query from Question 10 so that, in theory, you would retrieve a full list of all the DogIDs a user in the users table owns, with its accompagnying breed information whenever possible.  HOWEVER, BEFORE YOU RUN THE QUERY MAKE SURE TO LIMIT YOUR OUTPUT TO 100 ROWS *WITHIN* THE SUBQUERY TO THE LEFT OF YOUR JOIN.
+
+```mysql
+SELECT DistinctUUsersID.user_guid AS uUserID, DistictDUsersID.user_guid AS
+dUserID,
+DistictDUsersID.dog_guid AS DogID, DistictDUsersID.breed AS breed
+FROM (SELECT DISTINCT u.user_guid
+FROM users u
+LIMIT 100) AS DistinctUUsersID
+LEFT JOIN (SELECT DISTINCT d.user_guid, d.dog_guid, d.breed
+FROM dogs d) AS DistictDUsersID
+ON DistinctUUsersID.user_guid=DistictDUsersID.user_guid
+ORDER BY DistinctUUsersID.user_guid;
+```
+
+#### You might have a good guess by now about why there are duplicate rows in the dogs table and users table, even though most corporate databases are configured to prevent duplicate rows from ever being accepted. To be sure, though, let's adapt this query we wrote above:
+
+```mysql
+SELECT DistinctUUsersID.user_guid AS uUserID, d.user_guid AS dUserID, count(*) AS numrows
+FROM (SELECT DISTINCT u.user_guid FROM users u) AS DistinctUUsersID 
+LEFT JOIN dogs d
+  ON DistinctUUsersID.user_guid=d.user_guid
+GROUP BY DistinctUUsersID.user_guid
+ORDER BY numrows DESC 
+```
+
+#### Add dog breed and dog weight to the columns that will be included in the final output of your query. In addition, use a HAVING clause to include only UserIDs who would have more than 10 rows in the output of the left join (your output should contain 5 rows).
+
+```mysql
+SELECT DistictUUsersID.user_guid AS userid, d.breed, d.weight, count(*) AS numrows
+FROM (SELECT DISTINCT u.user_guid
+FROM users u) AS DistictUUsersID
+LEFT JOIN dogs d
+ON DistictUUsersID.user_guid=d.user_guid
+GROUP BY DistictUUsersID.user_guid
+HAVING numrows>10
+ORDER BY numrows DESC;
+```
+
+# Logical functions
+
+#### Write a query that will output distinct user_guids and their associated country of residence from the users table, excluding any user_guids or countries that have NULL values. You should get 16,261 rows in your result.
+
+```mysql
+SELECT DISTINCT user_guid, country
+FROM users
+WHERE country IS NOT NULL;
+```
+
+#### Use an IF expression and the query you wrote in Question 1 as a subquery to determine the number of unique user_guids who reside in the United States (abbreviated "US") and outside of the US.
+
+```mysql
+SELECT IF(cleaned_users.country='US','In US','Outside US') AS user_location,
+count(cleaned_users.user_guid) AS num_guids
+FROM (SELECT DISTINCT user_guid, country
+FROM users
+WHERE user_guid IS NOT NULL AND country IS NOT NULL) AS cleaned_users
+GROUP BY user_location;
+```
+
+#### Write a query using a CASE statement that outputs 3 columns: dog_guid, dog_fixed, and a third column that reads "neutered" every time there is a 1 in the "dog_fixed" column of dogs, "not neutered" every time there is a value of 0 in the "dog_fixed" column of dogs, and "NULL" every time there is a value of anything else in the "dog_fixed" column. Limit your results for troubleshooting purposes.
+
+```mysql
+SELECT dog_guid, dog_fixed,
+CASE dog_fixed
+WHEN "1" THEN "neutered"
+WHEN "0" THEN "not neutered"
+END AS neutered
+FROM dogs
+LIMIT 200;
+```
+
+#### We learned that NULL values should be treated the same as "0" values in the exclude columns of the dogs and users tables. Write a query using a CASE statement that outputs 3 columns: dog_guid, exclude, and a third column that reads "exclude" every time there is a 1 in the "exclude" column of dogs and "keep" every time there is any other value in the exclude column. Limit your results for troubleshooting purposes.
+
+```mysql
+SELECT dog_guid, exclude,
+CASE exclude
+WHEN "1" THEN "exclude"
+ELSE "keep"
+END AS exclude_cleaned
+FROM dogs
+LIMIT 200;
+```
+
+#### Re-write your query from Question 4 using an IF statement instead of a CASE statement.
+
+```mysql
+SELECT dog_guid, exclude, IF(exclude="1","exclude","keep") AS exclude_cleaned
+FROM dogs
+LIMIT 200;
+```
+
+#### Write a query that uses a CASE expression to output 3 columns: dog_guid, weight, and a third column that reads...
+#### "very small" when a dog's weight is 1-10 pounds
+#### "small" when a dog's weight is greater than 10 pounds to 30 pounds
+#### "medium" when a dog's weight is greater than 30 pounds to 50 pounds
+#### "large" when a dog's weight is greater than 50 pounds to 85 pounds
+#### "very large" when a dog's weight is greater than 85 pounds
+#### Limit your results for troubleshooting purposes.
+
+#### Remember that when you use AND to define values between two boundaries, you need to include the variable name in all clauses that define the conditions of the values you want to extract. In other words, you could use this combined clause in your query: “WHEN weight>10 AND weight<=30 THEN "small" …but this combined clause would cause an error: “WHEN weight>10 AND <=30 THEN "small"
+
+```mysql
+dog_guid, weight,
+CASE
+WHEN weight<=0 THEN "very small"
+WHEN weight>10 AND weight<=30 THEN "small"
+WHEN weight>30 AND weight<=50 THEN "medium"
+WHEN weight>50 AND weight<=85 THEN "large"
+WHEN weight>85 THEN "very large"
+END AS weight_grouped
+FROM dogs
+LIMIT 200;
+```
+
+#### For each dog_guid, output its dog_guid, breed_type, number of completed tests, and use an IF statement to include an extra column that reads "Pure_Breed" whenever breed_type equals 'Pure Breed" and "Not_Pure_Breed" whenever breed_type equals anything else. LIMIT your output to 50 rows for troubleshooting. HINT: you will need to use a join to complete this query.
+
+```mysql
+SELECT d.dog_guid AS dogID, d.breed_type AS breed_type, count(c.created_at) AS
+numtests,
+IF(d.breed_type='Pure Breed','pure_breed', 'not_pure_breed') AS pure_breed
+FROM dogs d, complete_tests c
+WHERE d.dog_guid=c.dog_guid
+GROUP BY dogID, breed_type, pure_breed
+LIMIT 50;
+```
+
+#### Write a query that uses a CASE statement to report the number of unique user_guids associated with customers who live in the United States and who are in the following groups of states:
+
+#### Group 1: New York (abbreviated "NY") or New Jersey (abbreviated "NJ")
+#### Group 2: North Carolina (abbreviated "NC") or South Carolina (abbreviated "SC")
+#### Group 3: California (abbreviated "CA")
+#### Group 4: All other states with non-null values
+
+#### You should find 898 unique user_guids in Group1.
+
+```mysql
+SELECT COUNT(DISTINCT user_guid),
+CASE
+WHEN (state="NY" OR state="NJ") THEN "Group 1-NY/NJ"
+WHEN (state="NC" OR state="SC") THEN "Group 2-NC/SC"
+WHEN state="CA" THEN "Group 3-CA"
+ELSE "Group 4-Other"
+END AS state_group
+FROM users
+WHERE country="US" AND state IS NOT NULL
+GROUP BY state_group;
+```
+
+#### Write a query that allows you to determine how many unique dog_guids are associated with dogs who are DNA tested and have either stargazer or socialite personality dimensions. Your answer should be 70.
+
+```mysql
+SELECT COUNT(DISTINCT dog_guid)
+FROM dogs
+WHERE dna_tested=1 AND (dimension='stargazer' OR dimension='socialite');
+```
+
+# Queries that test relationships between test completion and dog characteristics
+
+#### To get a feeling for what kind of values exist in the Dognition personality dimension column, write a query that will output all of the distinct values in the dimension column. Use your relational schema or the course materials to determine what table the dimension column is in. Your output should have 11 rows.
+
+```mysql
+SELECT DISTINCT dimension
+FROM dogs;
+```
+
+#### Use the equijoin syntax (described in MySQL Exercise 8) to write a query that will output the Dognition personality dimension and total number of tests completed by each unique DogID. This query will be used as an inner subquery in the next question. LIMIT your output to 100 rows for troubleshooting purposes.
+
+```mysql
+SELECT DISTINCT d.dog_guid AS id, d.dimension, COUNT(c.created_at)
+FROM dogs d LEFT JOIN complete_tests c
+ON d.dog_guid = c.dog_guid
+GROUP BY id
+```
+
+#### Re-write the query in Question 2 using traditional join syntax (described in MySQL Exercise 8).
+
+```mysql
+SELECT DISTINCT d.dog_guid AS id, d.dimension, COUNT(c.created_at)
+FROM dogs d, complete_tests c
+WHERE d.dog_guid = c.dog_guid
+GROUP BY id
+LIMIT 100;
+```
+
+#### To start, write a query that will output the average number of tests completed by unique dogs in each Dognition personality dimension.  Choose either the query in Question 2 or 3 to serve as an inner query in your main query.  If you have trouble, make sure you use the appropriate aliases in your GROUP BY and SELECT statements
+
+```mysql
+SELECT clean.dimension,AVG(clean.numtests) AS avgdogs
+FROM(SELECT DISTINCT d.dog_guid AS ID, d.dimension, COUNT(c.created_at) AS numtests
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     GROUP BY ID) AS clean
+GROUP BY dimension
+LIMIT 20;
+```
+
+#### How many unique DogIDs are summarized in the Dognition dimensions labeled "None" or ""? (You should retrieve values of 13,705 and 71)
+
+```mysql
+SELECT d.dimension, COUNT(DISTINCT d.dog_guid) AS counted
+FROM dogs d JOIN complete_tests c
+ON d.dog_guid = c.dog_guid
+WHERE d.dimension ='' OR d.dimension IS NULL
+GROUP BY d.dimension
+```
+
+#### To determine whether there are any features that are common to all dogs that have non-NULL empty strings in the dimension column, write a query that outputs the breed, weight, value in the "exclude" column, first or minimum time stamp in the complete_tests table, last or maximum time stamp in the complete_tests table, and total number of tests completed by each unique DogID that has a non-NULL empty string in the dimension column.
+
+```mysql
+SELECT d.dog_guid AS ID, d.breed, d.weight, d.exclude, MIN(c.created_at) AS Min, MAX(c.updated_at) AS Max, COUNT(c.updated_at)
+FROM dogs d JOIN complete_tests c
+ON d.dog_guid = c.dog_guid
+WHERE d.dimension = ''
+GROUP BY ID
+LIMIT 30;
+```
+
+#### Rewrite the query in Question 4 to exclude DogIDs with (1) non-NULL empty strings in the dimension column, (2) NULL values in the dimension column, and (3) values of "1" in the exclude column. NOTES AND HINTS: You cannot use a clause that says d.exclude does not equal 1 to remove rows that have exclude flags, because Dognition clarified that both NULL values and 0 values in the "exclude" column are valid data. A clause that says you should only include values that are not equal to 1 would remove the rows that have NULL values in the exclude column, because NULL values are never included in equals statements (as we learned in the join lessons). In addition, although it should not matter for this query, practice including parentheses with your OR and AND statements that accurately reflect the logic you intend. Your results should return 402 DogIDs in the ace dimension and 626 dogs in the charmer dimension.
+
+```mysql
+SELECT clean.dimension,COUNT(DISTINCT clean.ID) AS countdogs
+FROM(SELECT DISTINCT d.dog_guid AS ID, d.dimension
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE(d.dimension IS NOT NULL AND d.dimension !='') AND (d.exclude = '' OR d.exclude IS NULL)
+     GROUP BY ID) AS clean
+GROUP BY dimension;
+```
+
+#### Write a query that will output all of the distinct values in the breed_group field.
+
+```mysql
+
+```
+
+#### Write a query that outputs the breed, weight, value in the "exclude" column, first or minimum time stamp in the complete_tests table, last or maximum time stamp in the complete_tests table, and total number of tests completed by each unique DogID that has a NULL value in the breed_group column.
+
+```mysql
+SELECT DISTINCT d.dog_guid, d.breed_group, d.weight, d.exclude, MIN(c.created_at), MAX(c.updated_at), COUNT(c.updated_at)
+FROM dogs d LEFT JOIN complete_tests c
+ON d.dog_guid = c.dog_guid
+WHERE d.breed_group IS NULL
+GROUP BY dog_guid
+LIMIT 20
+```
+
+#### Adapt the query in Question 7 to examine the relationship between breed_group and number of tests completed. Exclude DogIDs with values of "1" in the exclude column. Your results should return 1774 DogIDs in the Herding breed group.
+
+```mysql
+SELECT clean.grupo, COUNT(DISTINCT clean.updated_at) AS Conteo
+FROM(SELECT d.dog_guid AS ID, d.breed_group AS grupo, d.dimension, c.updated_at
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE(d.exclude = '' OR d.exclude IS NULL)
+     GROUP BY ID) AS clean
+GROUP BY clean.grupo;
+```
+
+#### Adapt the query in Question 10 to only report results for Sporting, Hound, Herding, and Working breed_groups using an IN clause.
+
+```mysql
+SELECT clean.grupo, COUNT(DISTINCT clean.updated_at) AS Conteo
+FROM(SELECT d.dog_guid AS ID, d.breed_group AS grupo, d.dimension, c.updated_at
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE(d.exclude = '' OR d.exclude IS NULL) AND (d.breed_group IN ('Sporting','Hound','Herding','Working'))
+     GROUP BY ID) AS clean
+GROUP BY clean.grupo;
+```
+
+#### Begin by writing a query that will output all of the distinct values in the breed_type field.
+
+```mysql
+SELECT DISTINCT breed_type
+FROM dogs
+```
+
+#### Adapt the query in Question 7 to examine the relationship between breed_type and number of tests completed. Exclude DogIDs with values of "1" in the exclude column. Your results should return 8865 DogIDs in the Pure Breed group.
+
+```mysql
+SELECT tipo AS tipos,COUNT(completados) AS Conteo
+FROM(SELECT DISTINCT d.dog_guid AS ID, d.breed_type AS tipo, c.updated_at AS completados
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE (d.exclude = 0 OR d.exclude IS NULL)
+     GROUP BY ID) AS clean
+GROUP BY tipos;
+```
+
+#### For each unique DogID, output its dog_guid, breed_type, number of completed tests, and use a CASE statement to include an extra column with a string that reads "Pure_Breed" whenever breed_type equals 'Pure Breed" and "Not_Pure_Breed" whenever breed_type equals anything else. LIMIT your output to 50 rows for troubleshooting.
+
+```mysql
+SELECT d.dog_guid, d.breed_type, COUNT(c.updated_at), CASE breed_type
+                                                        WHEN 'Pure breed' THEN 'Pure_breed'
+                                                        ELSE 'Not_pure_breed'
+                                                        END AS Raza
+FROM dogs d, complete_tests c
+WHERE d.dog_guid = c.dog_guid
+GROUP BY Raza
+LIMIT 50
+```
+
+#### Adapt your queries from Questions 7 and 14 to examine the relationship between breed_type and number of tests completed by Pure_Breed dogs and non_Pure_Breed dogs. Your results should return 8336 DogIDs in the Not_Pure_Breed group.
+
+```mysql
+SELECT Raza,COUNT(contar) AS Conteo
+FROM(SELECT DISTINCT d.dog_guid AS ID, d.dimension,CASE breed_type
+                                                        WHEN 'Pure breed' THEN 'Pure_breed'
+                                                        ELSE 'Not_pure_breed'
+                                                        END AS Raza, c.created_at AS contar
+     FROM dogs AS d LEFT JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE(d.exclude = 0 OR d.exclude IS NULL)
+     GROUP BY ID) AS clean
+GROUP BY Raza;
+```
+
+#### Adapt your query from Question 15 to examine the relationship between breed_type, whether or not a dog was neutered (indicated in the dog_fixed field), and number of tests completed by Pure_Breed dogs and non_Pure_Breed dogs. There are DogIDs with null values in the dog_fixed column, so your results should have 6 rows, and the average number of tests completed by non-pure-breeds who are neutered is 10.5681.
+
+```mysql
+SELECT Raza,castrado,AVG(contar) AS Conteo, COUNT(DISTINCT ID)
+FROM(SELECT DISTINCT d.dog_guid AS ID, d.breed_group, d.dog_fixed AS castrado,CASE breed_type
+                                                        WHEN 'Pure breed' THEN 'Pure_breed'
+                                                        ELSE 'Not_pure_breed'
+                                                        END AS Raza, COUNT(c.created_at) AS contar
+     FROM dogs AS d JOIN complete_tests c
+     ON d.dog_guid = c.dog_guid
+     WHERE(d.exclude = 0 OR d.exclude IS NULL)
+     GROUP BY ID) AS clean
+GROUP BY Raza,castrado;
+```
+
+#### Adapt your query from Question 7 to include a column with the standard deviation for the number of tests completed by each Dognition personality dimension.
+
+```mysql
+SELECT dimension, STDDEV(conteo) AS desviacion
+FROM (SELECT DISTINCT d.dog_guid AS ID, d.dimension AS dimension, COUNT(c.updated_at) AS conteo
+      FROM dogs d LEFT JOIN complete_tests c
+      ON d.dog_guid = c.dog_guid
+      GROUP BY ID) AS limpio
+GROUP BY dimension
+```
+
+#### Write a query that calculates the average amount of time it took each dog breed_type to complete all of the tests in the exam_answers table. Exclude negative durations from the calculation, and include a column that calculates the standard deviation of durations for each breed_type group
+
+```mysql
+SELECT d.breed_type AS tipo, AVG(TIMESTAMPDIFF(minute, e.start_time, e.end_time)) AS diferencia
+FROM dogs d, exam_answers e
+WHERE d.dog_guid = e.dog_guid AND TIMESTAMPDIFF(minute, e.start_time, e.end_time) > 0
+GROUP BY tipo
+```
+
