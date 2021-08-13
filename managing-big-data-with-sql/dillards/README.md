@@ -4,17 +4,13 @@
 
 ## Business case
 
-Dognition (https://www.dognition.com) is a company that teaches you how to build a deeper connection with your dog by giving you an unprecedented perspective on your dog’s personality and capabilities.
+In 1938 William T Dillard founded a store in Nashville Arkansas, a southern state of the United States. Today, that store has grown into approximately 300 department stores in 29 states across United States of America, and each one of those stores has the same name, Dillard's. It sells all kinds of merchandise, from clothing, to accessories, to home decor. It has departments targeted towards women, as well as departments targeted towards men. It is a very popular place to shop. Luckily, it is also a store that collects a lot of data.
 
-As a customer, you purchase the opportunity to follow detailed instructions and how-to videos about how to play 20 fun and interactive games with your dog that were created by scientists, trainers, and behavioral specialists. These 20 games comprise the Dognition Assessment. When you finish the assessment, you receive a 10-15 page report about your dog’s unique personality dimension.
+Like most stores, when you are ready to purchase an item in Dillard's, you bring it to a sales associate working at a cash register. The sales associate will take the item and use the bar code reader to scan the bar code on the tag that took the store attached the item. This information from the bar code is sent to a centralized database where it is stored in a transaction table. When the customer pays for the item, the payment details are also sent to the transaction table. The receipt is printed and the transaction is completed.
 
-The Profile Report gives you individualized insight into the cognitive strategies your dog uses to interact with the world, and in-depth breakdowns of how your dog performed in each game compared to other dogs. You are also told your dog's Personality Profile, which is one of nine profiles or “dimensions” with titles like “Socialite,” “Einstein,” or “Maverick.”
+Hundreds of millions of purchase transactions are recorded at Dillard's per year. This provides a very good opportunity to use business analytics tools to **learn what factors influence customer purchasing.**
 
-<img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/ace-badge-30fe7e40ce64ca184222d06feda3aef7.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/charmer-badge-d969b9008b8ec9e7bab37635ae508ebd.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/socialite-badge-00fc21966d3ac77f1885a3d9194964b7.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/expert-badge-bb045f374b05c13a3427cd74a6844e56.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/renaissance-dog-badge-a9b0c505fd6bcc0f3cb15fbaa696d85f.png" width="100">
-
-<img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/protodog-badge-f3a41926abebb18d9015c0766e49505a.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/einstein-badge-1493afc11f9d66f4f343ec2f9dc06e00.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/maverick-badge-19d5212404388d137f4baa3bf1727c68.png" width="100"> <img src="https://d2kl333iheywy2.cloudfront.net/assets/cat/badges/stargazer-badge-6e4eb51f2ea0a268c5f884ea53f5f5f3.png" width="100">
-
-One of Dognition’s primary goals is to be able to collect as much data as possible from as many different kinds of dogs as possible. Thus, they have tasked us with helping them **figure out what business changes they could implement to increase the number of tests users complete on their website**. They have made the data set described below available for our Excel to MySQL: Analytic Techniques for Business Specialization course so that we as a class can learn how to use data analytics to make these types of actionable recommendations.
+<img src="https://www.pymnts.com/wp-content/uploads/2020/08/department-store-Dillards-earnings.jpg" width="1000">
 
 ### Important information:
 
@@ -28,7 +24,9 @@ month.
 
 ### Data description
 
-Dataset has been provided by [Dognition](https://www.dognition.com/), it contains **46 attributes**, which are:
+The data includes sales transaction data from August 2004 through July 2005. It includes exactly what items were included in each transaction, how much they cost and when and where the purchase was made. Additionally, there are census information about the metropolitan's statistical area surrounding the store in which the purchase was made. This information is spread across six tables ranging from 60 to over 120 million rows and size.
+
+Dataset has been donated by [Dillard's](https://www.dillards.com/) to Walton School of Business at the University of Arkansas, which in turn partnered with Duke University to provide this information via Coursera to its enrolled students. It contains **46 attributes**, which are:
 
 - `activity_type`
 - `birthday`
