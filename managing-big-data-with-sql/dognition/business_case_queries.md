@@ -4,6 +4,8 @@
 
 # Queries that test relationships between test completion and dog characteristics
 
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### To get a feeling for what kind of values exist in the Dognition personality dimension column, write a query that will output all of the distinct values in the dimension column. Use your relational schema or the course materials to determine what table the dimension column is in. Your output should have 11 rows.
 
 ```mysql
@@ -200,6 +202,8 @@ GROUP BY type
 ```
 
 # Queries that test relationships between test completion and testing circumstances
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
 
 #### Using the function you found in these websites (https://dev.mysql.com/doc/refman/5.7/en/sql-function-reference.html, http://www.w3resource.com/mysql/mysql-functions-and-operators.php), write a query that will output one column with the original created_at time stamp from each row in the completed_tests table, and another column with a number that represents the day of the week associated with each of those time stamps.  Limit your output to 200 rows starting at row 50.
 
