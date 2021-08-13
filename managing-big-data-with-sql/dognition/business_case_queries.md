@@ -1,6 +1,6 @@
-Index
-1. Queries that test relationships between test completion and dog characteristics 
-2. Queries that test relationships between test completion and testing circumstances
+# Index
+#### 1. [Queries that test relationships between test completion and dog characteristics](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#queries-that-test-relationships-between-test-completion-and-dog-characteristics)
+#### 2. [Queries that test relationships between test completion and testing circumstances](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#queries-that-test-relationships-between-test-completion-and-testing-circumstances)
 
 # Queries that test relationships between test completion and dog characteristics
 
