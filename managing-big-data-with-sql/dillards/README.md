@@ -12,6 +12,10 @@ Hundreds of millions of purchase transactions are recorded at Dillard's per year
 
 <img src="https://www.pymnts.com/wp-content/uploads/2020/08/department-store-Dillards-earnings.jpg" width="700">
 
+### Platform
+
+All queries were executed in **Oracle's Teradata Viewpoint**.
+
 ### Data description
 
 The data includes sales transaction data from August 2004 through July 2005. It includes exactly what items were included in each transaction, how much they cost and when and where the purchase was made. Additionally, there are census information about the metropolitan's statistical area surrounding the store in which the purchase was made. This information is spread across six tables ranging from 60 to over 120 million rows and size.
@@ -46,3 +50,8 @@ Dataset has been donated by [Dillard's](https://www.dillards.com/) to Walton Sch
 - **`upc`**: Universal Product Code for the stock item (categorical)
 - **`vendor`**: The vendor number of the stock item (categorical)
 - **`zip`**: ZIP Code (categorical)
+
+
+#### Dillard's database ERD
+
+![image](https://user-images.githubusercontent.com/52865532/129288606-656d98d0-2f35-438e-9554-acc858074478.png)
