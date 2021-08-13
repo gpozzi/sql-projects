@@ -11,7 +11,7 @@
 
 # WHERE clause
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### How would you select the Dog IDs for the dogs in the Dognition data set that were DNA tested (these should have a 1 in the dna_tested field of the dogs table)? Try it below (if you do not limit your output, your query should output data from 1433 dogs):
 
@@ -81,7 +81,7 @@ LIMIT 100;
 
 # AS, DISTINCT, ORDER BY, FORMATTING
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### How would you change the title of the "start_time" field in the exam_answers table to "exam start time" in a query output?
 
@@ -149,7 +149,7 @@ ORDER BY breed@
 ```
 # Summarizing data
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### Try combining this query with a WHERE clause to find how many individual dogs completed tests after March 1, 2014 (the answer should be 13,289):
 
@@ -263,7 +263,7 @@ WHERE TIMESTAMPDIFF(minute,start_time,end_time)>0
 
 # GROUP BY and HAVING
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### Output a table that calculates the number of distinct female and male dogs in each breed group of the Dogs table, sorted by the total number of dogs in descending order (the sex/breed_group pair with the greatest number of dogs should have 8466 unique Dog_Guids):
 
@@ -339,7 +339,7 @@ ORDER BY State ASC, NUM_Users DESC;
 
 # INNER JOIN
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### How many unique dog_guids and user_guids are there in the reviews and dogs table independently?
 
@@ -417,7 +417,7 @@ GROUP BY breed ORDER BY activity DESC
 ```
 # OUTER JOINS
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### How would you re-write this query using the traditional join syntax? 
 ```mySQL
@@ -539,7 +539,7 @@ GROUP BY SA_dogs_not_present_in_dogs_table;
 
 # Subqueries and derived tables
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### How could you use a subquery to extract all the data from exam_answers that had test durations that were greater than the average duration for the "Yawn Warm-Up" game? Start by writing the query that gives you the average duration for the "Yawn Warm-Up" game by itself (and don't forget to exclude negative values; your average duration should be about 9934)
 
@@ -694,7 +694,7 @@ ORDER BY numrows DESC;
 
 # Logical functions
 
-[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#index)
 
 #### Write a query that will output distinct user_guids and their associated country of residence from the users table, excluding any user_guids or countries that have NULL values. You should get 16,261 rows in your result.
 
