@@ -35,48 +35,48 @@ All queries were executed in **jupyter notebook** platform.
 Dataset has been provided by [Dognition](https://www.dognition.com/), it contains **46 attributes**, which are:
 
 - **`activity_type`**: Type of physical interaction with the website (ie: “cancel_monthly”, “video_player”, “pdf_report_render”, etc.). (**categorical**)
-- **`birthday`**: Birth year of the dog
-- **`breed`**: Name of breed
-- **`breed_group`**: Group to which a dog’s breed belongs (Herding, Hound, NonSporting, Sporting, Terrier, Toy, Working)
-- **`breed_type`**: Type of dog breed (pure breed, mixed breed, cross breed, popular hybrid)
-- **`category_id`**: All data is NULL in this field of the database
-- **`city`**: City of the user
-- **`country`**: Country of the user
-- **`created_at`**: Time stamp when the record in that row was created
-- **`description`**: Description related to script_detail_id
-- **`dimension`**: One of Dognition’s 9 personality profiles (Ace, Charmer, Einstein, Expert, Maverick, Protodog, Renaissance-dog, Socialite, Stargazer)
-- **`dna_tested`**: Flag for whether a dog’s DNA has been tested (1=Yes/0=No)
-- **`dog_fixed`**: Flag for whether a dog is neutered (also known as “fixed”) (1=Yes/0=No)
-- **`dog_guid`**: Unique ID for a dog
-- **`end_time`**: Timestamp when the user submitted their answer to a question in a Dognition test.
-- **`exclude`**: Flag provided by Dognition indicating whether an entry should be excluded (reasons not documented in the current data set; (1=Exclude, 0=Don’t necessarily exclude) 
-- **`free_start_user`**: Flag indicating whether a user received a “free start” by getting the first 4 games for free (1=free start, 0=not free start) 
-- **`gender`**: Gender of the dog
-- **`last_active_at`**: Time-stamp of user’s last activity in his/her Dognition account
-- **`loop_number`**: Exam questions often have multiple “loops.” This signifies which loop the customer was on. Negative numbers represent “re-dos.”
-- **`max_dogs`**: Number of dogs associated with a user
-- **`mean iti (days)`**: Mean inter-test-interval (ITI) between each test a dog completed (in days)
-- **`mean iti (minutes)`**: Mean inter-test-interval (ITI) between each test a dog completed (in minutes)
-- **`median iti (days)`**: Median inter-test-interval (ITI) between each test a dog completed (in days)
-- **`median iti (minutes)`**: Median inter-test-interval (ITI) between each test a dog completed (in minutes)
-- **`membership_id`**: Unique ID
-- **`membership_type`**: Type of subscription. 1=Dognition Assessment of initial 20 games, 2=Annual, 3=Monthly, 4=Free, 5=Subscription type of membership chosen by the user. Annual subscriptions provide the Dognition Assessment plus 12 months of subscription service (one new test and activity are “unlocked” per month, beginning of the month after purchase). Monthly subscriptions provide the Dognition Assessment plus the subscription service billed monthly. Free subscriptions were either offered through a “free start” promotion or through the Dognition MOOC. These users have access to the first 4 games for free and can then upgrade to unlock the rest. The Subscription” option (value of 5) is a recent test that offers the entire 20-game Dognition Assessment for free, but then allows user to upgrade to a monthly subscription
-- **`rank_by_dogid`**: The chronological rank of each test a dog completed (e.g. 1=first test dog completed, 3=third test dog completed, etc.)
-- **`rank_by_userid`**: The chronological rank of each test a user completed (e.g. 1=first test user completed, 3=third test user completed, etc.)
+- **`birthday`**: Birth year of the dog. (**ordinal**)
+- **`breed`**: Name of breed. (**categorical**)
+- **`breed_group`**: Group to which a dog’s breed belongs (Herding, Hound, NonSporting, Sporting, Terrier, Toy, Working). (**categorical**)
+- **`breed_type`**: Type of dog breed (pure breed, mixed breed, cross breed, popular hybrid). (**categorical**)
+- **`category_id`**: All data is NULL in this field of the database. (**categorical**)
+- **`city`**: City of the user. (**categorical**)
+- **`country`**: Country of the user. (**categorical**)
+- **`created_at`**: Time stamp when the record in that row was created. (**ordinal**)
+- **`description`**: Description related to script_detail_id. (**categorical**)
+- **`dimension`**: One of Dognition’s 9 personality profiles (Ace, Charmer, Einstein, Expert, Maverick, Protodog, Renaissance-dog, Socialite, Stargazer). (**categorical**)
+- **`dna_tested`**: Flag for whether a dog’s DNA has been tested (1=Yes/0=No). (**binary**)
+- **`dog_fixed`**: Flag for whether a dog is neutered (also known as “fixed”) (1=Yes/0=No). (**binary**)
+- **`dog_guid`**: Unique ID for a dog. (**categorical**)
+- **`end_time`**: Timestamp when the user submitted their answer to a question in a Dognition test. (**ordinal**)
+- **`exclude`**: Flag provided by Dognition indicating whether an entry should be excluded (reasons not documented in the current data set; (1=Exclude, 0=Don’t necessarily exclude). (**binary**)
+- **`free_start_user`**: Flag indicating whether a user received a “free start” by getting the first 4 games for free (1=free start, 0=not free start). (**binary**)
+- **`gender`**: Gender of the dog. (**categorical**)
+- **`last_active_at`**: Time-stamp of user’s last activity in his/her Dognition account. (**ordinal**)
+- **`loop_number`**: Exam questions often have multiple “loops.” This signifies which loop the customer was on. Negative numbers represent “re-dos.”. (**ordinal**)
+- **`max_dogs`**: Number of dogs associated with a user. (**ordinal**)
+- **`mean iti (days)`**: Mean inter-test-interval (ITI) between each test a dog completed (in days). (**ordinal**)
+- **`mean iti (minutes)`**: Mean inter-test-interval (ITI) between each test a dog completed (in minutes). (**ordinal**)
+- **`median iti (days)`**: Median inter-test-interval (ITI) between each test a dog completed (in days). (**ordinal**)
+- **`median iti (minutes)`**: Median inter-test-interval (ITI) between each test a dog completed (in minutes). (**ordinal**)
+- **`membership_id`**: Unique ID. (**categorical**)
+- **`membership_type`**: Type of subscription. 1=Dognition Assessment of initial 20 games, 2=Annual, 3=Monthly, 4=Free, 5=Subscription type of membership chosen by the user. Annual subscriptions provide the Dognition Assessment plus 12 months of subscription service (one new test and activity are “unlocked” per month, beginning of the month after purchase). Monthly subscriptions provide the Dognition Assessment plus the subscription service billed monthly. Free subscriptions were either offered through a “free start” promotion or through the Dognition MOOC. These users have access to the first 4 games for free and can then upgrade to unlock the rest. The Subscription” option (value of 5) is a recent test that offers the entire 20-game Dognition Assessment for free, but then allows user to upgrade to a monthly subscription. (**categorical**)
+- **`rank_by_dogid`**: The chronological rank of each test a dog completed (e.g. 1=first test dog completed, 3=third test dog completed, etc.). (**ordinal**)
+- **`rank_by_userid`**: The chronological rank of each test a user completed (e.g. 1=first test user completed, 3=third test user completed, etc.). (**ordinal**)
 - **`rating`**: The answer to the question “How surprising were [your dog’s name]’s choices?” Users could choose any number between 1 (not surprising) to 9 (very surprising)
-- **`script_detail_id`**: Number corresponding with the exact webpage a customer was on
-- **`script_id`**: An ID representing the type of Dognition activity users are engaged in. Numbers represent personality questionnaire (first set of questions after registering a dog), Dognition Assessment versions, other surveys, and monthly games available after the initial Dognition Assessment is completed
-- **`sign_in_count`**: Number of times a user signs in to his/her Dognition account
-- **`start_time`**: Timestamp when user received a question in a Dognition test
-- **`state`**: State of the user
-- **`step_type`**: Key for whether the test item was a question or a stopwatch
-- **`subcategory_name`**: Name of the cognitive sub-category a test belongs to (Communication, Cunning, Empathy, Expression Game, Impossible Task, Laterality, Memory, Numerosity, Perspective Game, Reasoning, Self Control Game, Shaker Game, Shell Game, Smell Game, Social Bias, Spatial Navigation).
-- **`subscribed`**: Flag for whether a user has a paid subscription (1=Yes/0=No)
-- **`test_name`**: Name of Dognition test
-- **`time diff between first and last game (days)`**: Time difference between the first and last game completed by a dog (in days)
-- **`time diff between first and last game (minutes)`**: Time difference between the first and last game completed by a dog (in minutes)
-- **`total tests completed`**: Number of tests completed by the dog
-- **`updated_at`**: Time stamp when the record in that row was created (will be the same as created_at if the record was never updated)
-- **`user_guid`**: Unique ID for a human user
-- **`weight`**: Weight of the dog (lbs)
-- **`zip`**: Zip code of the user
+- **`script_detail_id`**: Number corresponding with the exact webpage a customer was on. (**categorical**)
+- **`script_id`**: An ID representing the type of Dognition activity users are engaged in. Numbers represent personality questionnaire (first set of questions after registering a dog), Dognition Assessment versions, other surveys, and monthly games available after the initial Dognition Assessment is completed. (**categorical**)
+- **`sign_in_count`**: Number of times a user signs in to his/her Dognition account. (**ordinal**)
+- **`start_time`**: Timestamp when user received a question in a Dognition test. (**ordinal**)
+- **`state`**: State of the user. (**categorical**)
+- **`step_type`**: Key for whether the test item was a question or a stopwatch. (**categorical**)
+- **`subcategory_name`**: Name of the cognitive sub-category a test belongs to (Communication, Cunning, Empathy, Expression Game, Impossible Task, Laterality, Memory, Numerosity, Perspective Game, Reasoning, Self Control Game, Shaker Game, Shell Game, Smell Game, Social Bias, Spatial Navigation). (**categorical**)
+- **`subscribed`**: Flag for whether a user has a paid subscription (1=Yes/0=No). (**binary**)
+- **`test_name`**: Name of Dognition test. (**categorical**)
+- **`time diff between first and last game (days)`**: Time difference between the first and last game completed by a dog (in days). (**ordinal**)
+- **`time diff between first and last game (minutes)`**: Time difference between the first and last game completed by a dog (in minutes). (**ordinal**)
+- **`total tests completed`**: Number of tests completed by the dog. (**ordinal**)
+- **`updated_at`**: Time stamp when the record in that row was created (will be the same as created_at if the record was never updated). (**ordinal**)
+- **`user_guid`**: Unique ID for a human user. (**categorical**)
+- **`weight`**: Weight of the dog (lbs). (**ordinal**)
+- **`zip`**: Zip code of the user. (**categorical**)
