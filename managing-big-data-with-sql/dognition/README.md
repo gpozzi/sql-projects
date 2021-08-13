@@ -30,6 +30,14 @@ month.
 
 All queries were executed in **jupyter notebook** platform.
 
+### The queries
+
+For the sake of clarity, I divided the SQL scripts into two different files:
+
+- **`[sql_scripts.md](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md)`**: In this file, I documented every query written to learn different SQL functions. It has a progressive order of difficulty and it goes through every one of them.
+
+- **`[business_case_queries.md](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md)`**: In this file, I documented every query specifically written to address the business case (*figure out what business changes they could implement to increase the number of tests users complete on their website*)
+
 ### Data description
 
 Dataset has been provided by [Dognition](https://www.dognition.com/), it contains **46 attributes**, which are:
