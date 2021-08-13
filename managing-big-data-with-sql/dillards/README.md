@@ -10,65 +10,39 @@ Like most stores, when you are ready to purchase an item in Dillard's, you bring
 
 Hundreds of millions of purchase transactions are recorded at Dillard's per year. This provides a very good opportunity to use business analytics tools to **learn what factors influence customer purchasing.**
 
-<img src="https://www.pymnts.com/wp-content/uploads/2020/08/department-store-Dillards-earnings.jpg" width="1000">
-
-### Important information:
-
-- The 20-game Dognition Assessment assesses 5 core dimensions of cognition: empathy, communication, cunning, memory, and reasoning.
-- With a few exceptions, all games are presented to customers in the same order. Customers are not able to advance through tasks or trials out of order. This rule is implemented to make it as easy as possible for participants to follow all the steps of the games correctly.
-- After completing the 20-game Dognition Assessment, customers can sign up to receive additional games and activities at the rate of one game and one activity per
-month.
-- The Dognition team ran an experiment to determine whether a promotion that gave customers free access to the first 4 games of the Dognition Assessment would entice them to pay to complete the rest of the Dognition Assessment.
-- All information that could be used to identify specific users has been removed.
-- More details about the Dognition data collection method can be found at: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135176 (Stewart, Laughlin, et al. “Citizen science as a new tool in dog cognition research.” PloS One 10.9 (2015): e0135176.)
+<img src="https://www.pymnts.com/wp-content/uploads/2020/08/department-store-Dillards-earnings.jpg" width="700">
 
 ### Data description
 
 The data includes sales transaction data from August 2004 through July 2005. It includes exactly what items were included in each transaction, how much they cost and when and where the purchase was made. Additionally, there are census information about the metropolitan's statistical area surrounding the store in which the purchase was made. This information is spread across six tables ranging from 60 to over 120 million rows and size.
 
-Dataset has been donated by [Dillard's](https://www.dillards.com/) to Walton School of Business at the University of Arkansas, which in turn partnered with Duke University to provide this information via Coursera to its enrolled students. It contains **46 attributes**, which are:
+Dataset has been donated by [Dillard's](https://www.dillards.com/) to Walton School of Business at the University of Arkansas, which in turn partnered with Duke University to provide this information via Coursera to its enrolled students. It contains **28 attributes**, distributed into 6 tables which are:
 
-- `activity_type`
-- `birthday`
-- `breed`
-- `breed_group`
-- `breed_type`
-- `category_id`
-- `city`
-- `country`
-- `created_at`
-- `description`
-- `dimension`
-- `dna_tested`
-- `dog_fixed`
-- `dog_guid`
-- `end_time`
-- `exclude`
-- `free_start_user`
-- `gender`
-- `last_active_at`
-- `loop_number`
-- `max_dogs`
-- `mean iti (days)`
-- `mean iti (minutes)`
-- `median iti (days)`
-- `median iti (minutes)`
-- `membership_id`
-- `membership_type`
-- `rank_by_dogid`
-- `rank_by_userid`
-- `rating`
-- `script_detail_id`
-- `start_time`
-- `state`
-- `step_type`
-- `subcategory_name`
-- `subscribed`
-- `test_name`
-- `time diff between first and last game (days)`
-- `time diff between first and last game (minutes)`
-- `total tests completed`
-- `updated_at`
-- `user_guid`
-- `weight`
-- `zip`
+- **`amt`**: Total amount of the transaction charge to the customer (ordinal)
+- **`brand`**: The brand name of the stock item (categorical)
+- **`city`**: City where the store is located (categorical)
+- **`classid`**: Stock Item ClassificationThe color of the stock item (categorical)
+- **`color`**: The color of the stock item (categorical)
+- **`cost`**: The cost of the stock item (ordinal)
+- **`dept`**: Department where the stock item belong (categorical)
+- **`deptdesc`**: Description of the department (categorical)
+- **`interid`**: Internal ID (categorical)
+- **`mic`**: Master Item Code (categorical)
+- **`orgprice`**: Original price of the item stock (ordinal)
+- **`packsize`**: The quantity of item per pack (ordinal)
+- **`quantity`**: Item quantity of the transaction (ordinal)
+- **`register`**: Register Number of the current transaction
+- **`retail`**: The retail price of the stock item (ordinal)
+- **`saledate`**: Sale date of the item stock (ordinal)
+- **`seq`**: Sequence number (ordinal)
+- **`size`**: The size of the stock item (ordinal)
+- **`sku`**: Stock Keeping Unit number of the stock item (categorical)
+- **`sprice`**: Sale price of the item stock (ordinal)
+- **`state`**: State where the store is located (categorical)
+- **`store`**: Store Number (categorical)
+- **`style`**: The specific style of the stock item (categorical)
+- **`stype`**: Type of the transaction (Return or Purchase) (categorical)
+- **`trannum`**: Transaction Code (categorical)
+- **`upc`**: Universal Product Code for the stock item (categorical)
+- **`vendor`**: The vendor number of the stock item (categorical)
+- **`zip`**: ZIP Code (categorical)
