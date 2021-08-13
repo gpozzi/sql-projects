@@ -1,4 +1,17 @@
+# Index
+
+#### 1. [WHERE clause](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#where-clause)
+#### 2. [AS, DISTINCT, ORDER BY, FORMATTING](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#as-distinct-order-by-formatting)
+#### 3. [Summarizing data](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#summarizing-data)
+#### 4. [GROUP BY and HAVING](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#group-by-and-having)
+#### 5. [INNER JOIN](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#inner-join)
+#### 6. [OUTER JOINS](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#outer-joins)
+#### 7. [Subqueries and derived tables](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#subqueries-and-derived-tables)
+#### 8. [Logical functions](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md#logical-functions)
+
 # WHERE clause
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
 
 #### How would you select the Dog IDs for the dogs in the Dognition data set that were DNA tested (these should have a 1 in the dna_tested field of the dogs table)? Try it below (if you do not limit your output, your query should output data from 1433 dogs):
 
@@ -68,6 +81,8 @@ LIMIT 100;
 
 # AS, DISTINCT, ORDER BY, FORMATTING
 
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### How would you change the title of the "start_time" field in the exam_answers table to "exam start time" in a query output?
 
 ```sql
@@ -133,6 +148,9 @@ FROM dogs
 ORDER BY breed@
 ```
 # Summarizing data
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### Try combining this query with a WHERE clause to find how many individual dogs completed tests after March 1, 2014 (the answer should be 13,289):
 
 ```sql
@@ -245,6 +263,8 @@ WHERE TIMESTAMPDIFF(minute,start_time,end_time)>0
 
 # GROUP BY and HAVING
 
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### Output a table that calculates the number of distinct female and male dogs in each breed group of the Dogs table, sorted by the total number of dogs in descending order (the sex/breed_group pair with the greatest number of dogs should have 8466 unique Dog_Guids):
 
 ```sql
@@ -318,6 +338,8 @@ ORDER BY State ASC, NUM_Users DESC;
 ```
 
 # INNER JOIN
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
 
 #### How many unique dog_guids and user_guids are there in the reviews and dogs table independently?
 
@@ -394,6 +416,9 @@ WHERE d.dog_guid=s.dog_guid AND s.script_detail_id IS NOT NULL
 GROUP BY breed ORDER BY activity DESC
 ```
 # OUTER JOINS
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### How would you re-write this query using the traditional join syntax? 
 ```mySQL
 SELECT d.user_guid AS UserID, d.dog_guid AS DogID, 
@@ -513,6 +538,8 @@ GROUP BY SA_dogs_not_present_in_dogs_table;
 ```
 
 # Subqueries and derived tables
+
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
 
 #### How could you use a subquery to extract all the data from exam_answers that had test durations that were greater than the average duration for the "Yawn Warm-Up" game? Start by writing the query that gives you the average duration for the "Yawn Warm-Up" game by itself (and don't forget to exclude negative values; your average duration should be about 9934)
 
@@ -667,6 +694,8 @@ ORDER BY numrows DESC;
 
 # Logical functions
 
+[back to index](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md#index)
+
 #### Write a query that will output distinct user_guids and their associated country of residence from the users table, excluding any user_guids or countries that have NULL values. You should get 16,261 rows in your result.
 
 ```mysql
@@ -719,11 +748,11 @@ LIMIT 200;
 ```
 
 #### Write a query that uses a CASE expression to output 3 columns: dog_guid, weight, and a third column that reads...
-#### "very small" when a dog's weight is 1-10 pounds
-#### "small" when a dog's weight is greater than 10 pounds to 30 pounds
-#### "medium" when a dog's weight is greater than 30 pounds to 50 pounds
-#### "large" when a dog's weight is greater than 50 pounds to 85 pounds
-#### "very large" when a dog's weight is greater than 85 pounds
+#### - "very small" when a dog's weight is 1-10 pounds
+#### - "small" when a dog's weight is greater than 10 pounds to 30 pounds
+#### - "medium" when a dog's weight is greater than 30 pounds to 50 pounds
+#### - "large" when a dog's weight is greater than 50 pounds to 85 pounds
+#### - "very large" when a dog's weight is greater than 85 pounds
 #### Limit your results for troubleshooting purposes.
 
 #### Remember that when you use AND to define values between two boundaries, you need to include the variable name in all clauses that define the conditions of the values you want to extract. In other words, you could use this combined clause in your query: “WHEN weight>10 AND weight<=30 THEN "small" …but this combined clause would cause an error: “WHEN weight>10 AND <=30 THEN "small"
