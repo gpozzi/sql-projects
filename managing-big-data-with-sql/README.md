@@ -20,16 +20,9 @@ In this repository I will upload the projects submitted for the MySQL course tau
 - Week 4 - Subqueries & more Operators + examples
 
 # 3.  The data
-Throughout the course, I worked with two datasets:
-[Dognition](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition)
-[Dillards](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dillards)
 
-### Motivation
-  
-  [dataset info](https://d3c33hcgiwev3.cloudfront.net/_8ab42fa0c1e02dd9e637c84dcd8c6741_Dillards_database_information.pdf?Expires=1626998400&Signature=AqRDh7CoICNwmW3gzVx2sGcK5Dv3~q6GGQBasZ5QZuI3siYZxnfTGMpB4TiXRQDC1dwrtJTGfInZ6Q1YlINuhojSg9~XI7LdD4AbDYbiJK8LKVDpsuWekwWrwdxnPc19CeeZzH2i4svRoI-Y~SZ7MAKDh0o91JlVyDtBDjdvwL8_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
-  
-  ### ERD
-  
-  <img src="https://i.imgur.com/kZ4wpz5.png" width="500">
+Throughout the course I worked with two datasets, each one with a different business case, explained in the following links:
 
-</details>
+- [**Dognition**](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition)
+
+- [**Dillards**](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dillards)
