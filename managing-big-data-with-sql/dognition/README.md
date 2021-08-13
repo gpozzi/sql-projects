@@ -36,7 +36,7 @@ For the sake of clarity, I divided the SQL scripts into two different files:
 
 - [**`sql_scripts.md`**](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/sql_scripts.md): In this file, I documented every query written to learn different SQL functions. It has a progressive order of difficulty and it goes through every one of them.
 
-- [**`business_case_queries.md`**](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md): In this file, I documented every query specifically written to address the business case (*figure out what business changes they could implement to increase the number of tests users complete on their website*)
+- [**`business_case_queries.md`**](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md): In this file, I documented every query specifically written to address the business case (*figure out what business changes they could implement to increase the number of tests users complete on their website*). The complexity of them is higher than the ones found in the other file and it answers the most important business hypothesis.
 
 ### Data description
 
