@@ -12,7 +12,7 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 >By the end of this course, you will have a clear understanding of how relational databases work, and have a portfolio of queries you can show potential employers. Businesses are collecting increasing amounts of information with the hope that data will yield novel insights into how to improve businesses. Analysts that understand how to access this data – this means you! – will have a strong competitive advantage in this data-smitten business world.
 
-# Syllabus
+## 2.1. Syllabus
 
 - Week 1 - ER Diagrams, RS, database concepts
 - Week 2 - Select, where, from, order by, limit, operations
