@@ -26,11 +26,11 @@ month.
 - All information that could be used to identify specific users has been removed.
 - More details about the Dognition data collection method can be found at: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135176 (Stewart, Laughlin, et al. “Citizen science as a new tool in dog cognition research.” PloS One 10.9 (2015): e0135176.)
 
-### Platform
+## Platform
 
 All queries were executed in **jupyter notebook** platform.
 
-### The queries
+## The queries
 
 For the sake of clarity, I divided the SQL scripts into two different files:
 
@@ -38,7 +38,7 @@ For the sake of clarity, I divided the SQL scripts into two different files:
 
 - [**`business_case_queries.md`**](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dognition/business_case_queries.md): In this file, I documented every query specifically written to address the business case (*figure out what business changes they could implement to increase the number of tests users complete on their website*). The complexity of them is higher than the ones found in the other file and it answers the most important business hypothesis.
 
-### Data description
+## Data description
 
 Dataset has been provided by [Dognition](https://www.dognition.com/), it contains **46 attributes**, which are:
 
