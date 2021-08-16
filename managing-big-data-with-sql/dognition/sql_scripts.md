@@ -1163,10 +1163,15 @@ LIMIT 200;
 
 #### Write a query that uses a CASE expression to output 3 columns: dog_guid, weight, and a third column that reads...
 **- "very small" when a dog's weight is 1-10 pounds**
+
 **- "small" when a dog's weight is greater than 10 pounds to 30 pounds**
+
 **- "medium" when a dog's weight is greater than 30 pounds to 50 pounds**
+
 **- "large" when a dog's weight is greater than 50 pounds to 85 pounds**
+
 **- "very large" when a dog's weight is greater than 85 pounds**
+
 #### Limit your results for troubleshooting purposes.**
 
 #### Remember that when you use AND to define values between two boundaries, you need to include the variable name in all clauses that define the conditions of the values you want to extract. In other words, you could use this combined clause in your query: “WHEN weight>10 AND weight<=30 THEN "small" …but this combined clause would cause an error: “WHEN weight>10 AND <=30 THEN "small"
