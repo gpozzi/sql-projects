@@ -312,36 +312,72 @@ GROUP BY breed;
 #### Adapt your query from Question 15 to examine the relationship between breed_type, whether or not a dog was neutered (indicated in the dog_fixed field), and number of tests completed by Pure_Breed dogs and non_Pure_Breed dogs. There are DogIDs with null values in the dog_fixed column, so your results should have 6 rows, and the average number of tests completed by non-pure-breeds who are neutered is 10.5681.
 
 ```mysql
-SELECT breed,castrated,AVG(count_dogs) AS Conteo, COUNT(DISTINCT ID)
-FROM(SELECT DISTINCT d.dog_guid AS ID, d.breed_group, d.dog_fixed AS castrado,CASE breed_type
-                                                        WHEN 'Pure breed' THEN 'Pure_breed'
-                                                        ELSE 'Not_pure_breed'
-                                                        END AS Raza, COUNT(c.created_at) AS count_dogs
-     FROM dogs AS d JOIN complete_tests c
-     ON d.dog_guid = c.dog_guid
-     WHERE(d.exclude = 0 OR d.exclude IS NULL)
-     GROUP BY ID) AS clean
-GROUP BY breed,castrated;
+SELECT
+     breed,
+     neutered,
+     AVG(count_dogs) AS counted_dogs,
+     COUNT(DISTINCT ID)
+FROM
+     (SELECT
+          DISTINCT d.dog_guid AS ID,
+          d.breed_group,
+          d.dog_fixed AS neutered,
+          CASE breed_type
+               WHEN 'Pure breed' THEN 'Pure_breed'
+               ELSE 'Not_pure_breed'
+          END AS breed,
+          COUNT(c.created_at) AS count_dogs
+     FROM
+          dogs AS d
+     JOIN
+          complete_tests c
+     ON
+          d.dog_guid = c.dog_guid
+     WHERE
+          (d.exclude = 0 OR d.exclude IS NULL)
+     GROUP BY
+          ID) AS clean
+GROUP BY
+     breed,
+     neutered;
 ```
 
 #### Adapt your query from Question 7 to include a column with the standard deviation for the number of tests completed by each Dognition personality dimension.
 
 ```mysql
-SELECT dimension, STDDEV(conteo) AS deviation
-FROM (SELECT DISTINCT d.dog_guid AS ID, d.dimension AS dimension, COUNT(c.updated_at) AS counted
-      FROM dogs d LEFT JOIN complete_tests c
-      ON d.dog_guid = c.dog_guid
-      GROUP BY ID) AS clean
-GROUP BY dimension
+SELECT
+     dimension,
+     STDDEV(counted) AS deviation
+FROM
+     (SELECT
+          DISTINCT d.dog_guid AS ID,
+          d.dimension AS dimension,
+          COUNT(c.updated_at) AS counted
+     FROM
+          dogs d
+     LEFT JOIN
+          complete_tests c
+     ON
+          d.dog_guid = c.dog_guid
+     GROUP BY
+          ID) AS clean
+GROUP BY
+     dimension
 ```
 
 #### Write a query that calculates the average amount of time it took each dog breed_type to complete all of the tests in the exam_answers table. Exclude negative durations from the calculation, and include a column that calculates the standard deviation of durations for each breed_type group
 
 ```mysql
-SELECT d.breed_type AS type, AVG(TIMESTAMPDIFF(minute, e.start_time, e.end_time)) AS difference
-FROM dogs d, exam_answers e
-WHERE d.dog_guid = e.dog_guid AND TIMESTAMPDIFF(minute, e.start_time, e.end_time) > 0
-GROUP BY type
+SELECT
+     d.breed_type AS type,
+     AVG(TIMESTAMPDIFF(minute, e.start_time, e.end_time)) AS difference
+FROM
+     dogs d, exam_answers e
+WHERE
+     d.dog_guid = e.dog_guid
+     AND TIMESTAMPDIFF(minute, e.start_time, e.end_time) > 0
+GROUP BY
+     type
 ```
 
 # Queries that test relationships between test completion and testing circumstances
@@ -351,44 +387,55 @@ GROUP BY type
 #### Using the function you found in these websites (https://dev.mysql.com/doc/refman/5.7/en/sql-function-reference.html, http://www.w3resource.com/mysql/mysql-functions-and-operators.php), write a query that will output one column with the original created_at time stamp from each row in the completed_tests table, and another column with a number that represents the day of the week associated with each of those time stamps.  Limit your output to 200 rows starting at row 50.
 
 ```mysql
-SELECT created_at, DAYOFWEEK(created_at)
-FROM complete_tests
+SELECT
+     created_at,
+     DAYOFWEEK(created_at)
+FROM
+     complete_tests
 LIMIT 49,200;
 ```
 
 #### Include a CASE statement in the query you wrote in Question 1 to output a third column that provides the weekday name (or an appropriate abbreviation) associated with each created_at time stamp.
 
 ```mysql
-SELECT created_at, DAYOFWEEK(created_at),
-(CASE
-WHEN DAYOFWEEK(created_at)=1 THEN "Su"
-WHEN DAYOFWEEK(created_at)=2 THEN "Mo"
-WHEN DAYOFWEEK(created_at)=3 THEN "Tu"
-WHEN DAYOFWEEK(created_at)=4 THEN "We"
-WHEN DAYOFWEEK(created_at)=5 THEN "Th"
-WHEN DAYOFWEEK(created_at)=6 THEN "Fr"
-WHEN DAYOFWEEK(created_at)=7 THEN "Sa"
-END) AS daylabel
-FROM complete_tests
+SELECT
+     created_at,
+     DAYOFWEEK(created_at),
+     (CASE
+          WHEN DAYOFWEEK(created_at)=1 THEN "Su"
+          WHEN DAYOFWEEK(created_at)=2 THEN "Mo"
+          WHEN DAYOFWEEK(created_at)=3 THEN "Tu"
+          WHEN DAYOFWEEK(created_at)=4 THEN "We"
+          WHEN DAYOFWEEK(created_at)=5 THEN "Th"
+          WHEN DAYOFWEEK(created_at)=6 THEN "Fr"
+          WHEN DAYOFWEEK(created_at)=7 THEN "Sa"
+     END) AS daylabel
+FROM
+     complete_tests
 LIMIT 49,200;
 ```
 
 #### Adapt the query you wrote in Question 2 to report the total number of tests completed on each weekday. Sort the results by the total number of tests completed in descending order. You should get a total of 33,190 tests in the Sunday row of your output.
 
 ```mysql
-SELECT DAYOFWEEK(created_at),COUNT(created_at) AS numtests,
-(CASE
-WHEN DAYOFWEEK(created_at)=1 THEN "Su"
-WHEN DAYOFWEEK(created_at)=2 THEN "Mo"
-WHEN DAYOFWEEK(created_at)=3 THEN "Tu"
-WHEN DAYOFWEEK(created_at)=4 THEN "We"
-WHEN DAYOFWEEK(created_at)=5 THEN "Th"
-WHEN DAYOFWEEK(created_at)=6 THEN "Fr"
-WHEN DAYOFWEEK(created_at)=7 THEN "Sa"
-END) AS daylabel
-FROM complete_tests
-GROUP BY daylabel
-ORDER BY numtests DESC;
+SELECT
+     DAYOFWEEK(created_at),
+     COUNT(created_at) AS numtests,
+     (CASE
+          WHEN DAYOFWEEK(created_at)=1 THEN "Su"
+          WHEN DAYOFWEEK(created_at)=2 THEN "Mo"
+          WHEN DAYOFWEEK(created_at)=3 THEN "Tu"
+          WHEN DAYOFWEEK(created_at)=4 THEN "We"
+          WHEN DAYOFWEEK(created_at)=5 THEN "Th"
+          WHEN DAYOFWEEK(created_at)=6 THEN "Fr"
+          WHEN DAYOFWEEK(created_at)=7 THEN "Sa"
+     END) AS daylabel
+FROM
+     complete_tests
+GROUP BY
+     daylabel
+ORDER BY
+     numtests DESC;
 ```
 
 #### Rewrite the query in Question 3 to exclude the dog_guids that have a value of "1" in the exclude column (Hint: this query will require a join.)  This time you should get a total of 31,092 tests in the Sunday row of your output.
@@ -466,51 +513,79 @@ WHERE
 #### Now adapt your query from Question 4 so that it inner joins on the result of the subquery you wrote in Question 7 instead of the dogs table.  This will give you a count of the number of tests completed on each day of the week, excluding all of the dog_guids and user_guids that the Dognition team flagged in the exclude columns.
 
 ```mysql
-SELECT DAYOFWEEK(c.created_at) AS dayasnum, YEAR(c.created_at) AS year,
-COUNT(c.created_at) AS numtests,
-(CASE
-WHEN DAYOFWEEK(c.created_at)=1 THEN "Su"
-WHEN DAYOFWEEK(c.created_at)=2 THEN "Mo"
-WHEN DAYOFWEEK(c.created_at)=3 THEN "Tu"
-WHEN DAYOFWEEK(c.created_at)=4 THEN "We"
-WHEN DAYOFWEEK(c.created_at)=5 THEN "Th"
-WHEN DAYOFWEEK(c.created_at)=6 THEN "Fr"
-WHEN DAYOFWEEK(c.created_at)=7 THEN "Sa"
-END) AS daylabel
-FROM complete_tests c JOIN
-(SELECT DISTINCT dog_guid
-FROM dogs d JOIN users u
-ON d.user_guid=u.user_guid
-WHERE ((u.exclude IS NULL OR u.exclude=0)
-AND (d.exclude IS NULL OR d.exclude=0))) AS dogs_cleaned
-ON c.dog_guid=dogs_cleaned.dog_guid
-GROUP BY daylabel
-ORDER BY numtests DESC;
+SELECT
+     DAYOFWEEK(c.created_at) AS dayasnum,
+     YEAR(c.created_at) AS year,
+     COUNT(c.created_at) AS numtests,
+     (CASE
+          WHEN DAYOFWEEK(c.created_at)=1 THEN "Su"
+          WHEN DAYOFWEEK(c.created_at)=2 THEN "Mo"
+          WHEN DAYOFWEEK(c.created_at)=3 THEN "Tu"
+          WHEN DAYOFWEEK(c.created_at)=4 THEN "We"
+          WHEN DAYOFWEEK(c.created_at)=5 THEN "Th"
+          WHEN DAYOFWEEK(c.created_at)=6 THEN "Fr"
+          WHEN DAYOFWEEK(c.created_at)=7 THEN "Sa"
+     END) AS daylabel
+FROM
+     complete_tests c
+JOIN
+     (SELECT
+          DISTINCT dog_guid
+     FROM
+          dogs d
+     JOIN
+          users u
+     ON
+          d.user_guid = u.user_guid
+     WHERE
+          ((u.exclude IS NULL OR u.exclude=0)
+          AND (d.exclude IS NULL OR d.exclude=0))) AS dogs_cleaned
+ON
+     c.dog_guid = dogs_cleaned.dog_guid
+GROUP BY
+     daylabel
+ORDER BY
+     numtests DESC;
 ```
 
 #### Adapt your query from Question 8 to provide a count of the number of tests completed on each weekday of each year in the Dognition data set. Exclude all dog_guids and user_guids with a value of "1" in their exclude columns. Sort the output by year in ascending order, and then by the total number of tests completed in descending order. HINT: you will need a function described in one of these references to retrieve the year of each time stamp in the created_at field: https://dev.mysql.com/doc/refman/5.7/en/sql-function-reference.html http://www.w3resource.com/mysql/mysql-functions-and-operators.php
 
 ```mysql
-SELECT DAYOFWEEK(c.created_at) AS dayasnum, YEAR(c.created_at) AS
-year, COUNT(c.created_at) AS numtests,
-(CASE
-WHEN DAYOFWEEK(c.created_at)=1 THEN "Su"
-WHEN DAYOFWEEK(c.created_at)=2 THEN "Mo"
-WHEN DAYOFWEEK(c.created_at)=3 THEN "Tu"
-WHEN DAYOFWEEK(c.created_at)=4 THEN "We"
-WHEN DAYOFWEEK(c.created_at)=5 THEN "Th"
-WHEN DAYOFWEEK(c.created_at)=6 THEN "Fr"
-WHEN DAYOFWEEK(c.created_at)=7 THEN "Sa"
-END) AS daylabel
-FROM complete_tests c JOIN
-(SELECT DISTINCT dog_guid
-FROM dogs d JOIN users u
-ON d.user_guid=u.user_guid
-WHERE ((u.exclude IS NULL OR u.exclude=0)
-AND (d.exclude IS NULL OR d.exclude=0))) AS dogs_cleaned
-ON c.dog_guid=dogs_cleaned.dog_guid
-GROUP BY year,daylabel
-ORDER BY year ASC, numtests DESC;
+SELECT
+     DAYOFWEEK(c.created_at) AS dayasnum,
+     YEAR(c.created_at) AS year,
+     COUNT(c.created_at) AS numtests,
+     (CASE
+          WHEN DAYOFWEEK(c.created_at)=1 THEN "Su"
+          WHEN DAYOFWEEK(c.created_at)=2 THEN "Mo"
+          WHEN DAYOFWEEK(c.created_at)=3 THEN "Tu"
+          WHEN DAYOFWEEK(c.created_at)=4 THEN "We"
+          WHEN DAYOFWEEK(c.created_at)=5 THEN "Th"
+          WHEN DAYOFWEEK(c.created_at)=6 THEN "Fr"
+          WHEN DAYOFWEEK(c.created_at)=7 THEN "Sa"
+     END) AS daylabel
+FROM
+     complete_tests c
+JOIN
+     (SELECT
+          DISTINCT dog_guid
+     FROM
+          dogs d
+     JOIN
+          users u
+     ON
+          d.user_guid = u.user_guid
+     WHERE
+          ((u.exclude IS NULL OR u.exclude=0)
+          AND (d.exclude IS NULL OR d.exclude=0))) AS dogs_cleaned
+ON
+     c.dog_guid = dogs_cleaned.dog_guid
+GROUP BY
+     year,
+     daylabel
+ORDER BY
+     year ASC,
+     numtests DESC;
 ```
 
 #### First, adapt your query from Question 9 so that you only examine customers located in the United States, with Hawaii and Alaska residents excluded. HINTS: In this data set, the abbreviation for the United States is "US", the abbreviation for Hawaii is "HI" and the abbreviation for Alaska is "AK". You should have 5,860 tests completed on Sunday of 2013.
