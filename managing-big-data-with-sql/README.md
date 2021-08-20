@@ -1,4 +1,4 @@
-# Course overview: Managing Big Data with SQL
+# Managing Big Data with SQL
 
 <img src="https://i.imgur.com/nI7HkQC.jpg" width="300">
 
