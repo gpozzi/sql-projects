@@ -23,6 +23,6 @@ In this repository I will upload the projects submitted for the MySQL course tau
 
 Throughout the course I worked with two datasets, each one with a different business case, explained in the following links:
 
-- 🐶 [**Dognition**](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition): Dognition is a company that sells dogs personality tests. Goal: figure out what business changes it could implement to increase the number of tests users complete on their website.
+- 🐶 [**Dognition**](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dognition): Dognition is a company that sells dogs personality tests. The goal of this business case is to figure out what changes it could implement to increase the number of tests users complete on their website.
 
 - 👔 [**Dillards**](https://github.com/gpozzi/sql-projects/tree/main/managing-big-data-with-sql/dillards): exploratory data analysis queries to figure out relevant data about Dillard's sales dataset.
