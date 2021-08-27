@@ -4,7 +4,7 @@
 
 # 1. Scope
 
-In this repository I will upload the projects submitted for the MySQL course taught by Duke University, taken in Coursera platform
+In this repository I will upload the projects submitted for the MySQL course taught by Duke University, taken in Coursera's platform.
 
 # 2. Course Overview
 
