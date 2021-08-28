@@ -18,6 +18,8 @@ All queries were executed in **Oracle's Teradata Viewpoint**.
 
 ### Data description
 
+<img src="https://image.freepik.com/vector-gratis/investigacion-datos-estadisticos-indicadores-desempeno-empresa-retorno-inversion-razon-porcentual-fluctuacion-indices-cambio-significativo_335657-2552.jpg" width=200>
+
 The data includes sales transaction data from August 2004 through July 2005. It includes exactly what items were included in each transaction, how much they cost and when and where the purchase was made. Additionally, there are census information about the metropolitan's statistical area surrounding the store in which the purchase was made. This information is spread across six tables ranging from 60 to over 120 million rows and size.
 
 Dataset has been donated by [Dillard's](https://www.dillards.com/) to Walton School of Business at the University of Arkansas, which in turn partnered with Duke University to provide this information via Coursera to its enrolled students. It contains **28 attributes**, distributed into 6 tables which are:
