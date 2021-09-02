@@ -16,6 +16,12 @@ Hundreds of millions of purchase transactions are recorded at Dillard's per year
 
 All queries were executed in **Oracle's Teradata Viewpoint**.
 
+## The queries
+
+You can find all SQL scripts for this business case in this file:
+
+- [**`sql_scripts.md`**](https://github.com/gpozzi/sql-projects/blob/main/managing-big-data-with-sql/dillards/dillards.md).
+
 ### Data description
 
 <img src="https://image.freepik.com/vector-gratis/investigacion-datos-estadisticos-indicadores-desempeno-empresa-retorno-inversion-razon-porcentual-fluctuacion-indices-cambio-significativo_335657-2552.jpg" width=200>
