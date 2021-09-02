@@ -28,7 +28,7 @@ month.
 
 ## Platform
 
-All queries were executed in **jupyter notebook** platform.
+All queries were executed in **jupyter notebook**.
 
 ## The queries
 
