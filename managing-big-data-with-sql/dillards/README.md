@@ -1,4 +1,4 @@
-# Project at a glance: Dillards
+# Project at a glance: Dillards 👔
 
 <img src="https://image.freepik.com/vector-gratis/tienda-ropa-ninos-ropa-infantil-estilo-adolescente-prendas-moda-nina-bolsas-compra-comprador-boutique-moda-infantil-ilustracion-metafora-concepto-aislado-vector_335657-1330.jpg" width="300">
 
