@@ -310,4 +310,92 @@ ORDER BY
 LIMIT 1;
 ```
 
-#### 
+#### How many distinct dates are there in the saledate column of the transaction table for each month/year combination in the database?
+
+```sql
+SELECT 
+  EXTRACT(month FROM saledate) AS num_month, 
+  EXTRACT(year FROM saledate) AS num_year, 
+  COUNT(DISTINCT EXTRACT (day FROM saledate)) AS days_in_month, 
+FROM
+  trnsact
+GROUP BY
+  month_num,
+  year_num
+ORDER BY
+  num_year,
+  num_month
+```
+
+#### Use a CASE statement within an aggregate function to determine which sku had the greatest total sales during the combined summer months of June, July, and August. 
+
+```sql
+SELECT
+  DISTINCT sku,
+  SUM(CASE WHEN (EXTRACT(month FROM saledate)=6 OR EXTRACT(month FROM saledate)=7 OR EXTRACT(month FROM saledate)=8) AND stype='p' THEN amt END) AS summer
+FROM
+  trnsact
+GROUP BY
+  sku
+ORDER BY
+  summer DESC
+HAVING
+  summer > 0
+
+```
+
+#### How many distinct dates are there in the saledate column of the transaction table for each month/year/store combination in the database? Sort your results by the number of days per combination in ascending order. 
+
+```sql
+
+```
+
+#### What is the average daily revenue for each store/month/year combination in the database? Calculate this by dividing the total revenue for a group by the number of sales days available in the transaction table for that group. 
+
+```sql
+
+```
+
+#### What is the average daily revenue brought in by Dillard’s stores in areas of high, medium, or low levels of high school education? 
+
+```sql
+
+```
+
+#### Compare the average daily revenues of the stores with the highest median msa_income and the lowest median msa_income. In what city and state were these stores, and which store had a higher average daily revenue?
+
+```sql
+
+```
+
+#### What is the brand of the sku with the greatest standard deviation in sprice? Only examine skus that have been part of over 100 sales transactions. 
+
+```sql
+
+```
+
+#### Examine all the transactions for the sku with the greatest standard deviation in sprice (ie, your answer to exercise 7)
+
+```sql
+
+```
+
+#### What was the average daily revenue Dillard’s brought in during each month of the year?
+
+```sql
+
+```
+
+#### Which department, in which city and state of what store, had the greatest % increase in average daily sales revenue from November to December? 
+
+```sql
+
+```
+
+#### What is the city and state of the store that had the greatest decrease in average daily revenue from August to September? 
+
+```sql
+
+```
+
+#### Determine the month of minimum total revenue for each store. Count the number of stores whose month of minimum total revenue was in each of the twelve months. Then determine the month of minimum average daily revenue. Count the number of stores whose month of minimum average daily revenue was in each of the twelve months. How do they compare?
