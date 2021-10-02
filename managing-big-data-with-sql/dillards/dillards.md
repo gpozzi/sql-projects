@@ -347,13 +347,37 @@ HAVING
 #### How many distinct dates are there in the saledate column of the transaction table for each month/year/store combination in the database? Sort your results by the number of days per combination in ascending order. 
 
 ```sql
-
+SELECT 
+  EXTRACT (month FROM saledate) AS month_num, 
+  EXTRACT (year FROM saledate) AS year_num,
+  store,
+  COUNT (DISTINCT saledate) AS amt_dates
+FROM
+  trnsact
+GROUP BY
+  month_num, year_num, store
+ORDER BY
+  amt_dates ASC
 ```
 
 #### What is the average daily revenue for each store/month/year combination in the database? Calculate this by dividing the total revenue for a group by the number of sales days available in the transaction table for that group. 
 
 ```sql
-
+SELECT 
+  store, 
+  EXTRACT (month FROM saledate) AS month_num,
+  EXTRACT (year FROM saledate) AS year_num,
+  COUNT (DISTINCT saledate) AS amt_dates,
+  SUM(amt) AS total_revenue,
+  revenue/amt_dates AS avg_dr 
+FROM
+  trnsact
+WHERE
+  stype='p'
+GROUP BY
+  store, month_num, year_num
+ORDER BY
+  avg_dr desc
 ```
 
 #### What is the average daily revenue brought in by Dillard’s stores in areas of high, medium, or low levels of high school education? 
@@ -366,11 +390,32 @@ HAVING
 
 ```sql
 
+
+
 ```
 
 #### What is the brand of the sku with the greatest standard deviation in sprice? Only examine skus that have been part of over 100 sales transactions. 
 
 ```sql
+SELECT 
+  DISTINCT (t.SKU) AS item,
+  s.brand AS brand,
+  STDDEV_SAMP(t.sprice) AS stdev,
+  COUNT(DISTINCT(t.SEQ||t.STORE||t.REGISTER||t.TRANNUM||t.SALEDATE)) AS distinct_transactions
+FROM
+  TRNSACT t
+JOIN
+  SKUINFO s
+ON
+  t.sku=s.sku
+WHERE
+  t.stype='p'
+HAVING
+  distinct_transactions>100
+GROUP BY
+  item, brand
+ORDER BY
+  stdev DESC
 
 ```
 
